@@ -3,4 +3,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="welcome_message">Witaj w Dolinie</string>
+    <string name="sign_in">Zaloguj się</string>
+    <string name="sign_up">Zarejestruj się</string>
+
+    <string name="password_reset">Zapomniałeś hasła?</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Hasło</string>
+    <string name="nickname">Nazwa profilu</string>
 </resources>
