@@ -7,7 +7,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.databinding.ActivityMainBinding
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +20,13 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val userRepository = RepositoryLocator.userRepository
+
+        runBlocking {
+            val user = userRepository.getAll()
+            print(user)
+        }
 
         val navView: BottomNavigationView = binding.navView
 
