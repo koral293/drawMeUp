@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/singUpImageView" />
 
         <Button
-            android:id="@+id/singUpSignUpButton"
+            android:id="@+id/singUpButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="140dp"
@@ -60,11 +60,12 @@
             android:layout_marginEnd="90dp"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/e_mail"
+            android:hint="@string/e_mail"
+            android:text="@={viewModel.email}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nickNameEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/nicknameEditText" />
 
         <EditText
             android:id="@+id/singUpPasswordEditText"
@@ -74,24 +75,29 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="90dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="@string/password"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:text="@={viewModel.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/singUpEmailEditText" />
 
         <EditText
-            android:id="@+id/nickNameEditText"
+            android:id="@+id/nicknameEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="90dp"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/nickname"
+            android:hint="@string/nickname"
+            android:text="@={viewModel.nickname}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="101dp" />
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

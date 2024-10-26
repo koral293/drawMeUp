@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentSignUpBinding
+import com.example.drawmeup.navigation.ActionStatus
 
 class SignUpFragment : Fragment() {
 
@@ -24,6 +27,16 @@ class SignUpFragment : Fragment() {
                 it.viewModel = viewModel
                 binding.lifecycleOwner = this
             }.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.singUpButton.setOnClickListener {
+            val status = viewModel.onSubmit(binding)
+            if (ActionStatus.SUCCESS == status) {
+                findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
+            }
+        }
     }
 
 }

@@ -12,4 +12,8 @@ interface UserInterface {
     suspend fun getById(id: Int): UserEntity
 
     suspend fun testData()
+
+    companion object{
+        const val GENERATE_ID = 0
+    }
 }

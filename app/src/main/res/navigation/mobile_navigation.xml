@@ -41,10 +41,15 @@
         android:name="com.example.drawmeup.ui.guest.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in"/>
+
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.drawmeup.ui.guest.SignUpFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up"/>
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 </navigation>
