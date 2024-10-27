@@ -29,6 +29,12 @@ class UserRepository (val context: Context) : UserInterface {
         }
     }
 
+    override suspend fun getByEmailAndPassword(email: String, password: String): UserEntity? {
+        return withContext(Dispatchers.IO) {
+            db.user.getByEmailAndPassword(email, password)
+        }
+    }
+
     override suspend fun testData() {
         withContext(Dispatchers.IO) {
             if (getAll().isEmpty()) {

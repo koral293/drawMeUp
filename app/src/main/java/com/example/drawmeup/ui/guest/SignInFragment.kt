@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentSignInBinding
+import com.example.drawmeup.navigation.ActionStatus
+import kotlinx.coroutines.launch
 
 class SignInFragment : Fragment() {
 
@@ -24,6 +29,21 @@ class SignInFragment : Fragment() {
                 it.viewModel = viewModel
                 binding.lifecycleOwner = this
             }.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.signInButton.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val status = viewModel.onSubmit()
+
+                // Obsłuż wynik status
+                if (status == ActionStatus.SUCCESS) {
+                    findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
+                } else {
+                }
+            }
+        }
     }
 
 }

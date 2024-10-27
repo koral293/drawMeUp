@@ -17,6 +17,7 @@ class SignUpViewModel : ViewModel() {
     val password = MutableLiveData("")
 
     fun onSubmit(binding: FragmentSignUpBinding): ActionStatus {
+        //TODO: Check if the user already exists
         if (!nickname.value.isNullOrEmpty() && !email.value.isNullOrEmpty() && !password.value.isNullOrEmpty()) {
             var isError = false
             if (nickname.value!!.length < 3) {
@@ -37,16 +38,16 @@ class SignUpViewModel : ViewModel() {
 
             val newUser = User(
                 UserInterface.GENERATE_ID,
-                nickname.toString(),
-                email.toString(),
-                password.toString()
+                nickname.value.toString(),
+                email.value.toString(),
+                password.value.toString()
             )
             viewModelScope.launch {
+                //TODO Add check verification
                 RepositoryLocator.userRepository.createOrUpdate(newUser)
             }
             return ActionStatus.SUCCESS
         }
         return ActionStatus.FAILED
     }
-
 }

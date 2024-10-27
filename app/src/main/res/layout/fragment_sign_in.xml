@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/singInImageView" />
 
         <Button
-            android:id="@+id/singInSignInButton"
+            android:id="@+id/signInButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="140dp"
@@ -63,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/singInSignInButton"
+            app:layout_constraintTop_toBottomOf="@+id/signInButton"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -75,7 +75,8 @@
             android:layout_marginEnd="90dp"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/e_mail"
+            android:hint="@string/e_mail"
+            android:text="@={viewModel.email}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -88,8 +89,9 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="90dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="@string/password"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:text="@={viewModel.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"

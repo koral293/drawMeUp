@@ -11,6 +11,8 @@ interface UserInterface {
 
     suspend fun getById(id: Int): UserEntity
 
+    suspend fun getByEmailAndPassword(email: String, password: String): UserEntity?
+
     suspend fun testData()
 
     companion object{
