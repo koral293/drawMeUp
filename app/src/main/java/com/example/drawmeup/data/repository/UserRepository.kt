@@ -35,6 +35,18 @@ class UserRepository (val context: Context) : UserInterface {
         }
     }
 
+    override suspend fun getByName(name: String): UserEntity? {
+        return withContext(Dispatchers.IO) {
+            db.user.getByName(name)
+        }
+    }
+
+    override suspend fun getByEmail(email: String): UserEntity? {
+        return withContext(Dispatchers.IO) {
+            db.user.getByEmail(email)
+        }
+    }
+
     override suspend fun testData() {
         withContext(Dispatchers.IO) {
             if (getAll().isEmpty()) {

@@ -28,6 +28,7 @@ class WelcomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //TODO: Check if user is cached if so skip to main dashboard
         super.onViewCreated(view, savedInstanceState)
         binding.welcomeSignInButton.setOnClickListener {
             navController.navigate(R.id.action_welcomeFragment_to_signInFragment)

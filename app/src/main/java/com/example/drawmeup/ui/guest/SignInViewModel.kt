@@ -13,47 +13,19 @@ class SignInViewModel : ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
 
-    var userRepository = RepositoryLocator.userRepository
-
-//    fun onSubmit(): ActionStatus {
-//        var actionStatus = ActionStatus.FAILED
-//        if (!email.value.isNullOrEmpty() && !password.value.isNullOrEmpty()) {
-//            viewModelScope.launch {
-//                withContext(Dispatchers.Main) {
-//                    val result = userRepository.getByEmailAndPassword(
-//                        email.value.toString(),
-//                        password.value.toString()
-//                    )
-//
-//                    if (result != null) {
-//                        actionStatus = ActionStatus.SUCCESS
-//                    }
-//                }
-//            }
-//            return actionStatus
-//        }
-//        return ActionStatus.FAILED
-//    }
+    private var userRepository = RepositoryLocator.userRepository
 
     suspend fun onSubmit(): ActionStatus {
-        return if (!email.value.isNullOrEmpty() && !password.value.isNullOrEmpty()) {
-            //TODO: This does not work :(
-            val result = withContext(Dispatchers.IO) {
-                userRepository.getByEmailAndPassword(
-                    email.value.toString(),
-                    password.value.toString()
-                )
-            }
-            if (result != null) {
-                Logger.debug("User found: $result")
-                ActionStatus.SUCCESS
-            } else {
-                ActionStatus.FAILED
-            }
-        } else {
-            ActionStatus.FAILED
+        val result = withContext(Dispatchers.IO) {
+            userRepository.getByEmailAndPassword(
+                email.value.toString().lowercase(),
+                password.value.toString()
+            )
         }
+        if (result != null) {
+            Logger.debug("User found: $result")
+            return ActionStatus.SUCCESS
+        }
+        return ActionStatus.FAILED
     }
-
-
 }

@@ -13,6 +13,10 @@ interface UserInterface {
 
     suspend fun getByEmailAndPassword(email: String, password: String): UserEntity?
 
+    suspend fun getByName(name: String): UserEntity?
+
+    suspend fun getByEmail(email: String): UserEntity?
+
     suspend fun testData()
 
     companion object{
