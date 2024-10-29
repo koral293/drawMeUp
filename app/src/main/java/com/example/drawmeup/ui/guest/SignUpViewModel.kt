@@ -8,6 +8,7 @@ import com.example.drawmeup.data.interfaces.UserInterface
 import com.example.drawmeup.data.models.User
 import com.example.drawmeup.databinding.FragmentSignUpBinding
 import com.example.drawmeup.navigation.ActionStatus
+import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {
@@ -46,6 +47,7 @@ class SignUpViewModel : ViewModel() {
                 //TODO Add check verification
                 RepositoryLocator.userRepository.createOrUpdate(newUser)
             }
+            Logger.debug("User created: $newUser")
             return ActionStatus.SUCCESS
         }
         return ActionStatus.FAILED

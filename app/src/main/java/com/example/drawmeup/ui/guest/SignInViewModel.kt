@@ -2,11 +2,10 @@ package com.example.drawmeup.ui.guest
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.navigation.ActionStatus
+import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SignInViewModel : ViewModel() {
@@ -38,6 +37,7 @@ class SignInViewModel : ViewModel() {
 
     suspend fun onSubmit(): ActionStatus {
         return if (!email.value.isNullOrEmpty() && !password.value.isNullOrEmpty()) {
+            //TODO: This does not work :(
             val result = withContext(Dispatchers.IO) {
                 userRepository.getByEmailAndPassword(
                     email.value.toString(),
@@ -45,6 +45,7 @@ class SignInViewModel : ViewModel() {
                 )
             }
             if (result != null) {
+                Logger.debug("User found: $result")
                 ActionStatus.SUCCESS
             } else {
                 ActionStatus.FAILED
@@ -53,7 +54,6 @@ class SignInViewModel : ViewModel() {
             ActionStatus.FAILED
         }
     }
-
 
 
 }
