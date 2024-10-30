@@ -1,5 +1,6 @@
 package com.example.drawmeup.ui.guest
 
+import UserSession
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.drawmeup.data.RepositoryLocator
@@ -7,6 +8,7 @@ import com.example.drawmeup.navigation.ActionStatus
 import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Date
 
 class SignInViewModel : ViewModel() {
 
@@ -24,6 +26,12 @@ class SignInViewModel : ViewModel() {
         }
         if (result != null) {
             Logger.debug("User found: $result")
+
+            UserSession.user = result.toUser()
+            UserSession.isLogged = true
+            UserSession.lastLogged = Date()
+            UserSession.saveSession()
+
             return ActionStatus.SUCCESS
         }
         return ActionStatus.FAILED
