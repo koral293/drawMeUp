@@ -10,7 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class UserRepository (val context: Context) : UserInterface {
-    val db = DramMeUpRoomDB.open(context)
+    private val db = DramMeUpRoomDB.open(context)
+
     override suspend fun createOrUpdate(user: User) {
         withContext(Dispatchers.IO) {
             db.user.createOrUpdate(user.toEntity())

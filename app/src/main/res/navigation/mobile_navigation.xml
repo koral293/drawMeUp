@@ -15,7 +15,11 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.drawmeup.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_postFragment"
+            app:destination="@id/postFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -54,6 +58,16 @@
         <action
             android:id="@+id/action_signUpFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.example.drawmeup.ui.post.PostFragment"
+        android:label="PostFragment"
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_postFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
     </fragment>
 
 </navigation>

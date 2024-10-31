@@ -12,4 +12,9 @@
     <string name="e_mail">E-mail</string>
     <string name="password">Hasło</string>
     <string name="nickname">Nazwa profilu</string>
+
+    <string name="post_name">Tytuł pracy</string>
+    <string name="post_description">Opis pracy</string>
+    <string name="post_tags">Tagi</string>
+    <string name="post_add">Dodaj</string>
 </resources>
