@@ -11,9 +11,15 @@ import kotlinx.coroutines.withContext
 class PostRepository(val context: Context) : PostInterface {
     private val db = DramMeUpRoomDB.open(context)
 
-    override suspend fun createOrUpdate(post: Post) {
-        withContext(Dispatchers.IO) {
+    override suspend fun createOrUpdate(post: Post) : Long {
+        return withContext(Dispatchers.IO) {
             db.post.createOrUpdate(post.toEntity())
+        }
+    }
+
+    override suspend fun getPostById(id: Int): Post? {
+        return withContext(Dispatchers.IO) {
+            db.post.getPostById(id)?.toPost()
         }
     }
 }

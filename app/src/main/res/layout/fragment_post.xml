@@ -21,7 +21,6 @@
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent"
-           app:srcCompat="@drawable/obraz_2023_08_20_235249287"
            tools:src="@tools:sample/avatars" />
 
        <EditText
