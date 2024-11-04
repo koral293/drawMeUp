@@ -1,13 +1,21 @@
 package com.example.drawmeup.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.drawmeup.data.RepositoryLocator
+import com.example.drawmeup.data.models.Post
+import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
+    private val postRepository = RepositoryLocator.postRepository
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun loadPosts() {
+        viewModelScope.launch {
+            postList.value = postRepository.getAll()
+        }
     }
-    val text: LiveData<String> = _text
+
+    val postList: MutableLiveData<List<Post>> = MutableLiveData(emptyList())
+
 }

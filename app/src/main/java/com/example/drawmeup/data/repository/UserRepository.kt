@@ -9,7 +9,7 @@ import com.example.drawmeup.data.models.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class UserRepository (val context: Context) : UserInterface {
+class UserRepository(val context: Context) : UserInterface {
     private val db = DramMeUpRoomDB.open(context)
 
     override suspend fun createOrUpdate(user: User) {
@@ -55,17 +55,19 @@ class UserRepository (val context: Context) : UserInterface {
                     User(
                         id = 1,
                         name = "Test",
-                        email = "test@gmail.com",
+                        email = "test@test",
                         password = "test",
-                    ))
+                    )
+                )
                 createOrUpdate(
                     User(
                         id = 2,
                         name = "Test2",
                         email = "test@gmail.com",
                         password = "test",
-                    ))
+                    )
+                )
             }
-    }
+        }
     }
 }

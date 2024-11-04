@@ -35,18 +35,18 @@ class PostFragment : Fragment() {
                 val data: Intent? = result.data
                 val imageUri = data?.data
                 Glide.with(this)
-                    .asBitmap() // Wymuszamy załadowanie jako Bitmap
+                    .asBitmap()
                     .load(imageUri)
                     .override(256, 256)
-                    .into(object : CustomTarget<Bitmap>() { // CustomTarget, zamiast ImageView
+                    .into(object : CustomTarget<Bitmap>() {
                         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                            // Ustawiamy Bitmap w ImageView
+
                             binding.postArtImageView.setImageBitmap(resource)
                             viewModel.image.value = resource
                         }
 
                         override fun onLoadCleared(placeholder: Drawable?) {
-                            // Opcjonalnie - zwalnianie zasobów, jeśli potrzebne
+
                         }
                     })
             }

@@ -17,6 +17,7 @@ object RepositoryLocator {
 
         runBlocking {
             userRepository.testData()
+            postRepository.testData()
         }
     }
 }

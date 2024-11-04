@@ -11,6 +11,9 @@ interface PostDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createOrUpdate(post: PostEntity) : Long
 
+    @Query("SELECT * FROM post")
+    suspend fun getAll(): List<PostEntity>
+
     @Query("SELECT * FROM post WHERE id = :id")
     suspend fun getPostById(id: Int): PostEntity?
 }
