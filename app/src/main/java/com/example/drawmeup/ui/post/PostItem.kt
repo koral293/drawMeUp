@@ -37,7 +37,13 @@ class PostItem(myContext: Context, private val postItemBinding: PostItemBinding)
         authorText.text = UserRepository.getById(postItem.userId).name
 
         root.setOnClickListener {
-            //TODO: Navigate to detailed post view
+            onItemClick(postItem.id)
+        }
+
+        artImage.setOnClickListener {
+            Logger.debug("Image clicked")
+            onItemClick(postItem.id)
+
         }
     }
 }
