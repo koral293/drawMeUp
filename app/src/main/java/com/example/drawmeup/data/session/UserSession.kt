@@ -18,14 +18,12 @@ object UserSession {
     var isLogged: Boolean = false
     var lastLogged: Date = Date()
 
-    // Inicjalizacja SharedPreferences
     fun init(context: Context) {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         }
     }
 
-    // Zapisz sesję użytkownika
     fun saveSession() {
         sharedPreferences?.edit()?.apply {
             putInt(KEY_USER_ID, user.id)
@@ -33,12 +31,11 @@ object UserSession {
             putString(KEY_USER_EMAIL, user.email)
             putString(KEY_USER_PASSWORD, user.password)
             putBoolean(KEY_IS_LOGGED, isLogged)
-            putLong(KEY_LAST_LOGGED, lastLogged.time)  // Zapis daty jako long (timestamp)
+            putLong(KEY_LAST_LOGGED, lastLogged.time)
             apply()
         }
     }
 
-    // Załaduj sesję użytkownika
     fun loadSession() {
         user = User(
             id = sharedPreferences?.getInt(KEY_USER_ID, -1) ?: -1,
@@ -50,7 +47,6 @@ object UserSession {
         lastLogged = Date(sharedPreferences?.getLong(KEY_LAST_LOGGED, Date().time) ?: Date().time)
     }
 
-    // Wylogowanie i usunięcie danych sesji
     fun clearSession() {
         sharedPreferences?.edit()?.clear()?.apply()
         user = User(0, "", "", "")
