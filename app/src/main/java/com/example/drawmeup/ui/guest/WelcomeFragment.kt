@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentWelcomeBinding
 import com.example.drawmeup.utils.Logger
+import java.util.Calendar
+import java.util.Date
 
 class WelcomeFragment : Fragment() {
 
@@ -34,11 +36,20 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         UserSession.loadSession()
-        Logger.debug("UserSession: ${UserSession.user} lastLogged: ${UserSession.lastLogged}")
 
-        //TODO: Check if user is session is not expired
         if (UserSession.isLogged) {
-            navigateToHome()
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DAY_OF_MONTH, -30)
+            val date30DaysAgo = calendar.time
+            if (UserSession.lastLogged.before(date30DaysAgo)) {
+                Logger.debug("Session expired")
+                UserSession.clearSession()
+            } else {
+                Logger.debug("Session valid")
+                UserSession.lastLogged = Date()
+                UserSession.saveSession()
+                navigateToHome()
+            }
         }
 
         binding.welcomeSignInButton.setOnClickListener {
@@ -50,15 +61,13 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        val navController = findNavController()
+        Logger.debug("UserSession: ${UserSession.user} lastLogged: ${UserSession.lastLogged}")
 
+        val navController = findNavController()
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.navigation_home, true)
             .build()
-
         navController.navigate(R.id.navigation_home, null, navOptions)
-
-
     }
 
 }
