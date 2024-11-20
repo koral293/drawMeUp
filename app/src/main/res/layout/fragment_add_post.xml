@@ -5,13 +5,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.drawmeup.ui.post.PostsViewModel" />
+            type="com.example.drawmeup.ui.post.AddPostViewModel" />
     </data>
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       tools:context=".ui.post.PostsFragment">
+       tools:context=".ui.post.AddPostFragment">
 
        <ImageView
            android:id="@+id/postArtImageView"

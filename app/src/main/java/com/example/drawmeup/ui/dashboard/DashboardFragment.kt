@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -26,14 +24,6 @@ class DashboardFragment : Fragment() {
                 it.viewModel = viewModel
                 binding.lifecycleOwner = this
             }.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.addPostButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_dashboard_to_postFragment)
-        }
-
     }
 
 }

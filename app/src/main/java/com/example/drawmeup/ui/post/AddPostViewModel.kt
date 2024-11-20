@@ -9,7 +9,7 @@ import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.navigation.ActionStatus
 import com.example.drawmeup.utils.Logger
 
-class PostsViewModel : ViewModel() {
+class AddPostViewModel : ViewModel() {
 
     val name = MutableLiveData("")
     val description = MutableLiveData("")

@@ -18,15 +18,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.drawmeup.R
-import com.example.drawmeup.databinding.FragmentPostsBinding
+import com.example.drawmeup.databinding.FragmentAddPostBinding
 import com.example.drawmeup.navigation.ActionStatus
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
-class PostsFragment : Fragment() {
+class AddPostFragment : Fragment() {
 
-    private lateinit var binding: FragmentPostsBinding
-    private val viewModel: PostsViewModel by viewModels()
+    private lateinit var binding: FragmentAddPostBinding
+    private val viewModel: AddPostViewModel by viewModels()
 
     private val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
     private val pickImage =
@@ -39,7 +39,10 @@ class PostsFragment : Fragment() {
                     .load(imageUri)
                     .override(256, 256)
                     .into(object : CustomTarget<Bitmap>() {
-                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
 
                             binding.postArtImageView.setImageBitmap(resource)
                             viewModel.image.value = resource
@@ -57,7 +60,7 @@ class PostsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentPostsBinding.inflate(layoutInflater, container, false)
+        return FragmentAddPostBinding.inflate(layoutInflater, container, false)
             .also {
                 binding = it
                 it.viewModel = viewModel
@@ -75,7 +78,7 @@ class PostsFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 val status = viewModel.addPost()
                 if (ActionStatus.SUCCESS == status) {
-                    findNavController().navigate(R.id.action_postFragment_to_navigation_dashboard)
+                    findNavController().navigate(R.id.action_addPostFragment_to_navigation_home)
 
                 }
             }

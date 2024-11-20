@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -33,7 +34,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        PostListAdapter = PostListAdapter(viewModel::onViewPost)
+        PostListAdapter = PostListAdapter(viewModel::onViewPost, viewModel::onPostLike)
         binding.postListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = PostListAdapter
@@ -47,6 +48,10 @@ class HomeFragment : Fragment() {
 
         viewModel.navigation.observe(viewLifecycleOwner) {
             it.resolve(findNavController())
+        }
+
+        binding.addPostButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_addPostFragment)
         }
     }
 

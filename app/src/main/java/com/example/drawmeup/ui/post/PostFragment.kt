@@ -1,15 +1,12 @@
 package com.example.drawmeup.ui.post
 
-import android.os.Build
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.drawmeup.R
-import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.databinding.FragmentPostBinding
 import com.example.drawmeup.navigation.PostType
 import com.example.drawmeup.utils.Logger
@@ -17,10 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.runBlocking
 
 private const val TYPE_KEY = "type"
+
 class PostFragment : Fragment() {
 
-    private val viewModel: PostViewModel by viewModels()
     private lateinit var binding: FragmentPostBinding
+    private val viewModel: PostViewModel by viewModels()
     private lateinit var type: PostType
 
     override fun onCreate(savedInstanceState: Bundle?) {
