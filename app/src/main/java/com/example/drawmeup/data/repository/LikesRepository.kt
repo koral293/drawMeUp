@@ -36,6 +36,12 @@ class LikesRepository(val context: Context) : LikesInterface {
         }
     }
 
+    override suspend fun getLike(userId: Int, postId: Int): LikesEntity? {
+        return withContext(Dispatchers.IO) {
+            db.likes.getLike(userId, postId)
+        }
+    }
+
     override suspend fun testData() {
         withContext(Dispatchers.IO) {
             if (getAll().isEmpty()) {

@@ -15,6 +15,8 @@ class HomeViewModel : ViewModel() {
     private val postRepository = RepositoryLocator.postRepository
     private val likesRepository = RepositoryLocator.likesRepository
 
+    private var likeBoolean = MutableLiveData<Boolean>(false)
+
     val navigation = MutableLiveData<Destination>()
 
     fun onViewPost(id: Int) {
@@ -22,10 +24,14 @@ class HomeViewModel : ViewModel() {
         navigation.value = PostNav(id)
     }
 
-    fun onPostLike( userId: Int, postId: Int) {
+    fun onPostLike( userId: Int, postId: Int, isLiked: Boolean) {
         Logger.debug("User $userId Like post $postId")
         viewModelScope.launch {
-            likesRepository.addLike(Likes(userId, postId))
+            if (isLiked) {
+                likesRepository.removeLike(Likes(userId, postId))
+            } else {
+                likesRepository.addLike(Likes(userId, postId))
+            }
         }
     }
 

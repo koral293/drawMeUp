@@ -6,7 +6,7 @@ import com.example.drawmeup.databinding.PostItemBinding
 import com.example.drawmeup.ui.post.PostItem
 import kotlinx.coroutines.runBlocking
 
-class PostListAdapter(private val onItemClick: (Int) -> Unit, private val onLikeClick: (Int, Int) -> Unit) : RecyclerView.Adapter<PostItem>() {
+class PostListAdapter(private val onItemClick: (Int) -> Unit, private val onLikeClick: (Int, Int, Boolean) -> Unit) : RecyclerView.Adapter<PostItem>() {
     var postList: List<Post> = emptyList()
         set(value) {
             field = value

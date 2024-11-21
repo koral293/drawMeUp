@@ -19,6 +19,9 @@ interface LikesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addLike(likesEntity: LikesEntity)
 
+    @Query("SELECT * FROM likes WHERE userId = :userId AND postId = :postId")
+    suspend fun getLike(userId: Int, postId: Int) : LikesEntity?
+
     @Delete
     suspend fun removeLike(likesEntity: LikesEntity)
 }

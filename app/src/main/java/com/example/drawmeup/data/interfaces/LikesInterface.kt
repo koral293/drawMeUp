@@ -13,6 +13,8 @@ interface LikesInterface {
 
     suspend fun removeLike(likes: Likes)
 
+    suspend fun getLike(userId: Int, postId: Int) : LikesEntity?
+
     suspend fun testData()
 
 }
