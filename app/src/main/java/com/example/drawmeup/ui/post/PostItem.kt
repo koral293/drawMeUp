@@ -1,7 +1,6 @@
 package com.example.drawmeup.ui.post
 
 import UserSession
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.WindowManager
 import android.widget.ImageView
@@ -10,7 +9,6 @@ import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.databinding.PostItemBinding
 import com.example.drawmeup.utils.Logger
-import kotlinx.coroutines.runBlocking
 
 class PostItem(myContext: Context, private val postItemBinding: PostItemBinding) :
     RecyclerView.ViewHolder(postItemBinding.root) {
@@ -18,7 +16,6 @@ class PostItem(myContext: Context, private val postItemBinding: PostItemBinding)
     private val likesRepository = RepositoryLocator.likesRepository
     private val context = myContext
 
-    @SuppressLint("SetTextI18n")
     suspend fun onBind(
         postItem: Post,
         onItemClick: (Int) -> Unit,
@@ -57,13 +54,14 @@ class PostItem(myContext: Context, private val postItemBinding: PostItemBinding)
         likeButton.setOnClickListener {
             onLikeClick(UserSession.user.id, postItem.id, isLiked)
 
+            val likesCountInt = (likesCountText.text as String).toInt()
             if (isLiked) {
                 likeButton.setImageResource(android.R.drawable.btn_star_big_off)
-                likesCountText.text = ((likesCountText.text as String).toInt() - 1).toString()
+                likesCountText.text = String.format((likesCountInt - 1).toString())
                 isLiked = false
             } else {
                 likeButton.setImageResource(android.R.drawable.btn_star_big_on)
-                likesCountText.text = ((likesCountText.text as String).toInt() + 1).toString()
+                likesCountText.text = String.format((likesCountInt + 1).toString())
                 isLiked = true
             }
         }

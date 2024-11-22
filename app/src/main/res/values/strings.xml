@@ -2,7 +2,7 @@
     <string name="app_name">DrawMeUp</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
 
     <string name="welcome_message">Witaj w Dolinie</string>
     <string name="sign_in">Zaloguj się</string>
