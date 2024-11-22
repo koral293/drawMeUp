@@ -1,22 +1,19 @@
 package com.example.drawmeup.ui.profile
 
-import UserSession
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.example.drawmeup.databinding.FragmentHomeBinding
-import com.example.drawmeup.databinding.FragmentNotificationsBinding
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.drawmeup.databinding.FragmentProfileBinding
-import com.example.drawmeup.ui.home.HomeViewModel
+import com.example.drawmeup.utils.Logger
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var profileListAdapter: ProfileListAdapter
     private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
@@ -31,5 +28,30 @@ class ProfileFragment : Fragment() {
                 binding.lifecycleOwner = this
             }.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        profileListAdapter = ProfileListAdapter()
+
+        binding.profileRecyclerView.apply {
+            addItemDecoration(GridSpacingItemDecoration(10))
+            //TODO: Be aware might be buggy
+            layoutManager = GridLayoutManager(context, 3)
+            adapter = profileListAdapter
+        }
+
+        viewModel.postList.observe(viewLifecycleOwner) {
+            profileListAdapter.postList = it
+            Logger.debug(it.toString())
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadPosts()
+    }
+
 
 }

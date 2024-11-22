@@ -17,7 +17,7 @@ import com.example.drawmeup.utils.Logger
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var PostListAdapter: PostListAdapter
+    private lateinit var postListAdapter: PostListAdapter
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -35,13 +35,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        PostListAdapter = PostListAdapter(viewModel::onViewPost, viewModel::onPostLike)
+        postListAdapter = PostListAdapter(viewModel::onViewPost, viewModel::onPostLike)
         binding.postListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = PostListAdapter
+            adapter = postListAdapter
         }
         viewModel.postList.observe(viewLifecycleOwner) {
-            PostListAdapter.postList = it
+            postListAdapter.postList = it
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {

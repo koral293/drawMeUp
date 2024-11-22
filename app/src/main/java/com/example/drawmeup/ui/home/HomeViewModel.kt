@@ -14,8 +14,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel : ViewModel() {
     private val postRepository = RepositoryLocator.postRepository
     private val likesRepository = RepositoryLocator.likesRepository
-
-    private var likeBoolean = MutableLiveData<Boolean>(false)
+    val postList: MutableLiveData<List<Post>> = MutableLiveData(emptyList())
 
     val navigation = MutableLiveData<Destination>()
 
@@ -24,7 +23,7 @@ class HomeViewModel : ViewModel() {
         navigation.value = PostNav(id)
     }
 
-    fun onPostLike( userId: Int, postId: Int, isLiked: Boolean) {
+    fun onPostLike(userId: Int, postId: Int, isLiked: Boolean) {
         Logger.debug("User $userId Like post $postId")
         viewModelScope.launch {
             if (isLiked) {
@@ -40,7 +39,5 @@ class HomeViewModel : ViewModel() {
             postList.value = postRepository.getAll()
         }
     }
-
-    val postList: MutableLiveData<List<Post>> = MutableLiveData(emptyList())
 
 }
