@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentHomeBinding
+import com.example.drawmeup.utils.Logger
 
 class HomeFragment : Fragment() {
 
@@ -42,6 +43,13 @@ class HomeFragment : Fragment() {
         viewModel.postList.observe(viewLifecycleOwner) {
             PostListAdapter.postList = it
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadPosts()
+            binding.swipeRefreshLayout.isRefreshing = false
+            Logger.debug("List refreshed")
+        }
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().finish()
         }
