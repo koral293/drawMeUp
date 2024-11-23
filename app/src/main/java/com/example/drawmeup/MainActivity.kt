@@ -1,6 +1,7 @@
 package com.example.drawmeup
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
+        findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
 
         val navView: BottomNavigationView = binding.navView
 
