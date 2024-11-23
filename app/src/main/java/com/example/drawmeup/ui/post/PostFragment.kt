@@ -43,6 +43,7 @@ class PostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(viewModel) {
+            //TODO: What is purpose of that?????
             (type as? PostType.View)?.let { init(it.id) }
 
             runBlocking {

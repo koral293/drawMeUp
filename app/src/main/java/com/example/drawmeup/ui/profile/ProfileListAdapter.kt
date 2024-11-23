@@ -19,7 +19,7 @@ class ProfileListAdapter :
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ProfileItemBinding.inflate(layoutInflater, parent, false)
 
-        return ProfileItem(parent.context, binding)
+        return ProfileItem(binding)
     }
 
     override fun onBindViewHolder(holder: ProfileItem, position: Int) {

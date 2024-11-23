@@ -50,11 +50,11 @@ class PostItem(myContext: Context, private val postItemBinding: PostItemBinding)
             likeButton.setImageResource(android.R.drawable.btn_star_big_off)
         }
 
-        //TODO: Track if user liked this post already
         likeButton.setOnClickListener {
             onLikeClick(UserSession.user.id, postItem.id, isLiked)
 
             val likesCountInt = (likesCountText.text as String).toInt()
+
             if (isLiked) {
                 likeButton.setImageResource(android.R.drawable.btn_star_big_off)
                 likesCountText.text = String.format((likesCountInt - 1).toString())

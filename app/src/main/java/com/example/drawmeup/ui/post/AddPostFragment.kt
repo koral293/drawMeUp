@@ -27,7 +27,6 @@ class AddPostFragment : Fragment() {
 
     private lateinit var binding: FragmentAddPostBinding
     private val viewModel: AddPostViewModel by viewModels()
-
     private val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
     private val pickImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -43,13 +42,11 @@ class AddPostFragment : Fragment() {
                             resource: Bitmap,
                             transition: Transition<in Bitmap>?
                         ) {
-
                             binding.postArtImageView.setImageBitmap(resource)
                             viewModel.image.value = resource
                         }
 
                         override fun onLoadCleared(placeholder: Drawable?) {
-
                         }
                     })
             }
@@ -71,15 +68,16 @@ class AddPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
+
         binding.postArtImageView.setOnClickListener {
             pickImage.launch(intent)
         }
+
         binding.addButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 val status = viewModel.addPost()
                 if (ActionStatus.SUCCESS == status) {
                     findNavController().navigate(R.id.action_addPostFragment_to_navigation_home)
-
                 }
             }
         }

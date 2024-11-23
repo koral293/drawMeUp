@@ -14,13 +14,20 @@ class AddPostViewModel : ViewModel() {
     val name = MutableLiveData("")
     val description = MutableLiveData("")
     val tags = MutableLiveData("")
-    val image = MutableLiveData<Bitmap>(Bitmap.createBitmap(256,256, Bitmap.Config.ARGB_8888))
+    val image = MutableLiveData(Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888))
 
     private var postRepository = RepositoryLocator.postRepository
 
-    suspend fun addPost() : ActionStatus {
+    suspend fun addPost(): ActionStatus {
         val id = UserSession.user.id
-        val newPost = Post(0, id, name.value!!.toString(), image.value!!, description.value!!.toString(), tags.value!!.split(" ").toMutableList() as ArrayList<String>)
+        val newPost = Post(
+            0,
+            id,
+            name.value!!.toString(),
+            image.value!!,
+            description.value!!.toString(),
+            tags.value!!.split(" ").toMutableList() as ArrayList<String>
+        )
         Logger.debug("New post: $newPost")
         val postId = postRepository.createOrUpdate(newPost)
         Logger.debug("New post id: $postId")
@@ -31,7 +38,6 @@ class AddPostViewModel : ViewModel() {
             Logger.debug("Post found: $post")
             return ActionStatus.SUCCESS
         }
-
         return ActionStatus.FAILED
     }
 

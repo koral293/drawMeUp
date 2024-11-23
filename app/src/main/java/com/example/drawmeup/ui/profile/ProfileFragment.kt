@@ -31,7 +31,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         profileListAdapter = ProfileListAdapter()
 
         binding.profileRecyclerView.apply {
@@ -45,13 +44,11 @@ class ProfileFragment : Fragment() {
             profileListAdapter.postList = it
             Logger.debug(it.toString())
         }
-
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.loadPosts()
     }
-
 
 }
