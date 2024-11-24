@@ -1,9 +1,11 @@
 package com.example.drawmeup.data
 
 import android.content.Context
+import com.example.drawmeup.data.interfaces.CommentInterface
 import com.example.drawmeup.data.interfaces.LikesInterface
 import com.example.drawmeup.data.interfaces.PostInterface
 import com.example.drawmeup.data.interfaces.UserInterface
+import com.example.drawmeup.data.repository.CommentRepository
 import com.example.drawmeup.data.repository.LikesRepository
 import com.example.drawmeup.data.repository.PostRepository
 import com.example.drawmeup.data.repository.UserRepository
@@ -13,16 +15,19 @@ object RepositoryLocator {
     lateinit var userRepository: UserInterface
     lateinit var postRepository: PostInterface
     lateinit var likesRepository: LikesInterface
+    lateinit var commentRepository: CommentInterface
 
     fun init(context: Context) {
         userRepository = UserRepository(context)
         postRepository = PostRepository(context)
         likesRepository = LikesRepository(context)
+        commentRepository = CommentRepository(context)
 
         runBlocking {
             userRepository.testData()
             postRepository.testData()
             likesRepository.testData()
+            commentRepository.testData()
         }
     }
 }

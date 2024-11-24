@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentPostBinding
 import com.example.drawmeup.navigation.PostType
@@ -44,7 +45,18 @@ class PostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(viewModel) {
             //TODO: What is purpose of that?????
-            (type as? PostType.View)?.let { init(it.id) }
+            (type as? PostType.View)?.let { init(it.id)
+            loadComments(it.id)}
+
+            val commentListAdaper = PostCommentsAdapter(viewModel::deleteComment)
+
+            binding.commentsList.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = commentListAdaper
+            }
+            viewModel.commentList.observe(viewLifecycleOwner) {
+                commentListAdaper.commentList = it
+            }
 
             runBlocking {
                 val post = postRepository.getPostById((type as? PostType.View)?.id ?: 0)
@@ -64,5 +76,9 @@ class PostFragment : Fragment() {
         super.onDestroyView()
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility =
             View.VISIBLE
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 }
