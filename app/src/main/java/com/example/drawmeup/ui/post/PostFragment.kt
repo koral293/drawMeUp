@@ -1,18 +1,21 @@
 package com.example.drawmeup.ui.post
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentPostBinding
+import com.example.drawmeup.navigation.ActionStatus
 import com.example.drawmeup.navigation.PostType
-import com.example.drawmeup.utils.Logger
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.runBlocking
 
 private const val TYPE_KEY = "type"
 
@@ -45,8 +48,10 @@ class PostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(viewModel) {
             //TODO: What is purpose of that?????
-            (type as? PostType.View)?.let { init(it.id)
-            loadComments(it.id)}
+            (type as? PostType.View)?.let {
+                init(it.id, ::loadImage)
+                loadComments()
+            }
 
             val commentListAdaper = PostCommentsAdapter(viewModel::deleteComment)
 
@@ -58,19 +63,30 @@ class PostFragment : Fragment() {
                 commentListAdaper.commentList = it
             }
 
-            runBlocking {
-                val post = postRepository.getPostById((type as? PostType.View)?.id ?: 0)
-                Logger.debug("Post found: $post")
-                viewModel.name.value = post?.name
-                viewModel.description.value = post?.description
-                viewModel.image.value = post?.postData
-                viewModel.tags.value = post?.tag?.joinToString { it }
-                viewModel.author.value = post?.userId.toString()
-                binding.imageView.setImageBitmap(post?.postData)
+            //TODO: Image like in post view
+
+            binding.sendCommentButton.setOnClickListener {
+                val status = addComment()
+                if (status == ActionStatus.SUCCESS) {
+                    Toast.makeText(
+                        requireContext().applicationContext,
+                        "Komentarz dodany",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                val imm =
+                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val currentFocus = requireActivity().currentFocus // Get the currently focused view
+                if (currentFocus != null) {
+                    imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+                }
             }
         }
     }
 
+    private fun loadImage(image: Bitmap) {
+        binding.imageView.setImageBitmap(image)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -78,7 +94,4 @@ class PostFragment : Fragment() {
             View.VISIBLE
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 }

@@ -62,7 +62,7 @@ class SignUpViewModel : ViewModel() {
         }
 
         val newUser = User(
-            UserInterface.GENERATE_ID,
+            0,
             nickname.value.toString(),
             email.value.toString().lowercase(),
             password.value.toString()

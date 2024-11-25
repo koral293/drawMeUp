@@ -12,7 +12,7 @@ object Logger {
     }
 
     fun debug(message: String) {
-        Log.d(getClassName(), message)
+        Log.d("Custom logger " + getClassName(), message)
     }
 
 }

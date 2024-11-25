@@ -12,6 +12,7 @@ import com.example.drawmeup.data.models.Comment
 import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.databinding.CommentItemBinding
 import com.example.drawmeup.databinding.PostItemBinding
+import java.util.Date
 
 class CommentItem (myContext: Context, private val commentItemBinding: CommentItemBinding) :
     RecyclerView.ViewHolder(commentItemBinding.root) {
@@ -27,6 +28,7 @@ class CommentItem (myContext: Context, private val commentItemBinding: CommentIt
         userAvatar.setImageBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888))
         userName.text = userRepository.getById(comment.userId).name
         commentText.text = comment.comment
+        dateTextView.text = comment.date
 
 
         root.setOnLongClickListener {

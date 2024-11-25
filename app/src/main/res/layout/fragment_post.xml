@@ -75,28 +75,32 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:hint="tESTSETEST"
             android:text="@={viewModel.description}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/likePostButton" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentsList"
-            android:layout_width="409dp"
-            android:layout_height="480dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/sendCommentButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/commentEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postDescription"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.507"
+            tools:listitem="@layout/comment_item" />
 
         <EditText
             android:id="@+id/commentEditText"
             android:layout_width="326dp"
             android:layout_height="76dp"
+            android:background="@android:drawable/dialog_holo_dark_frame"
             android:ems="10"
             android:inputType="text"
-            android:text="Name"
+            android:text="@={viewModel.comment}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

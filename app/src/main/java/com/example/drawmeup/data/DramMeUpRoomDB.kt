@@ -17,7 +17,7 @@ import com.example.drawmeup.utils.Converters
 
 @Database(
     entities = [UserEntity::class, PostEntity::class, LikesEntity::class, CommentEntity::class],
-    version = 4
+    version = 5
 )
 @TypeConverters(Converters::class)
 abstract class DramMeUpRoomDB : RoomDatabase() {

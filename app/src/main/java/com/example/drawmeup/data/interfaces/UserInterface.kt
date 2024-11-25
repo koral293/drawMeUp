@@ -19,7 +19,4 @@ interface UserInterface {
 
     suspend fun testData()
 
-    companion object{
-        const val GENERATE_ID = 0
-    }
 }

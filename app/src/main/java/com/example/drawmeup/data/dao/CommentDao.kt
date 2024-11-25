@@ -10,7 +10,7 @@ import com.example.drawmeup.data.models.Comment
 @Dao
 interface CommentDao {
 
-    @Query("SELECT * FROM comments WHERE postId = :postId")
+    @Query("SELECT * FROM comments WHERE postId = :postId ORDER BY date DESC")
     suspend fun getComments(postId: Int): List<CommentEntity>
 
     @Insert
