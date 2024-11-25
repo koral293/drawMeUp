@@ -7,9 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Comment
-import com.example.drawmeup.databinding.FragmentPostBinding
 import com.example.drawmeup.navigation.ActionStatus
-import com.example.drawmeup.navigation.PostType
 import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

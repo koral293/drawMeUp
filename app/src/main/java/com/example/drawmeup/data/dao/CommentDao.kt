@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.drawmeup.data.entities.CommentEntity
-import com.example.drawmeup.data.models.Comment
 
 @Dao
 interface CommentDao {

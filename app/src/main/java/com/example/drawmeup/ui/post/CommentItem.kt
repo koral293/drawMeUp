@@ -6,15 +6,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.drawmeup.R
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Comment
-import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.databinding.CommentItemBinding
-import com.example.drawmeup.databinding.PostItemBinding
-import java.util.Date
 
-class CommentItem (myContext: Context, private val commentItemBinding: CommentItemBinding) :
+class CommentItem(myContext: Context, private val commentItemBinding: CommentItemBinding) :
     RecyclerView.ViewHolder(commentItemBinding.root) {
     private val userRepository = RepositoryLocator.userRepository
     private val likesRepository = RepositoryLocator.likesRepository
@@ -22,7 +18,7 @@ class CommentItem (myContext: Context, private val commentItemBinding: CommentIt
 
     suspend fun onBind(
         comment: Comment,
-        deleteItem : (Comment) -> Unit
+        deleteItem: (Comment) -> Unit
     ) = with(commentItemBinding) {
 
         userAvatar.setImageBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888))
@@ -44,7 +40,11 @@ class CommentItem (myContext: Context, private val commentItemBinding: CommentIt
 
                 builder.show()
             } else {
-                Toast.makeText(context, "Nie można usuwać nie swoich komentarzy", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Nie można usuwać nie swoich komentarzy",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             true
         }

@@ -4,7 +4,6 @@ import UserSession
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.drawmeup.data.RepositoryLocator
-import com.example.drawmeup.data.interfaces.UserInterface
 import com.example.drawmeup.data.models.User
 import com.example.drawmeup.databinding.FragmentSignUpBinding
 import com.example.drawmeup.navigation.ActionStatus
