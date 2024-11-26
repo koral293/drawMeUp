@@ -1,6 +1,5 @@
 package com.example.drawmeup.ui.home
 
-import PostListAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

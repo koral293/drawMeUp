@@ -6,19 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.drawmeup.databinding.FragmentDashboardBinding
+import com.example.drawmeup.databinding.FragmentConversationsBinding
 
-class DashboardFragment : Fragment() {
+class ConversationsFragment : Fragment() {
 
-    private lateinit var binding: FragmentDashboardBinding
-    private val viewModel: DashboardViewModel by viewModels()
+    private lateinit var binding: FragmentConversationsBinding
+    private val viewModel: ConversationsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentDashboardBinding.inflate(layoutInflater, container, false)
+        return FragmentConversationsBinding.inflate(layoutInflater, container, false)
             .also {
                 binding = it
                 it.viewModel = viewModel

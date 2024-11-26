@@ -81,11 +81,25 @@ class PostFragment : Fragment() {
                     imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
                 }
             }
+
+            binding.likePostButton.setOnClickListener {
+                viewModel.onPostLike(UserSession.user.id, ::setLikeButtonImage)
+
+            }
         }
     }
 
     private fun loadImage(image: Bitmap) {
         binding.imageView.setImageBitmap(image)
+        setLikeButtonImage(viewModel.isLiked.value!!)
+    }
+
+    private fun setLikeButtonImage(isLiked: Boolean) {
+        if (isLiked) {
+            binding.likePostButton.setImageResource(android.R.drawable.btn_star_big_on)
+        } else {
+            binding.likePostButton.setImageResource(android.R.drawable.btn_star_big_off)
+        }
     }
 
     override fun onDestroyView() {

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Comment
+import com.example.drawmeup.data.models.Likes
 import com.example.drawmeup.navigation.ActionStatus
 import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.launch
@@ -29,19 +30,25 @@ class PostViewModel : ViewModel() {
 
     var postId: Int = 0
 
+    var isLiked = MutableLiveData(false)
+
     val commentList = MutableLiveData(emptyList<Comment>())
 
     fun init(id: Int, loadImage: (Bitmap) -> Unit) {
         postId = id
         viewModelScope.launch {
-            val post = postRepository.getPostById(id)!!
-            Logger.debug("Post found: $post")
-            name.value = post.name
-            description.value = post.description
-            tags.value = post.tag.joinToString { it }
-            author.value = userRepository.getById(post.userId).name
-            likes.value = likesRepository.getCountForPost(id).toString()
-            loadImage(post.postData)
+                val post = postRepository.getPostById(id)!!
+                Logger.debug("Post found: $post")
+                name.value = post.name
+                description.value = post.description
+                tags.value = post.tag.joinToString { it }
+                author.value = userRepository.getById(post.userId).name
+                likes.value = likesRepository.getCountForPost(id).toString()
+
+                isLiked.value = likesRepository.getLike(UserSession.user.id, postId) != null
+                Logger.debug("Is liked: ${isLiked.value}")
+
+                loadImage(post.postData)
         }
     }
 
@@ -76,6 +83,23 @@ class PostViewModel : ViewModel() {
             return ActionStatus.SUCCESS
         }
         return ActionStatus.FAILED
+    }
+
+    fun onPostLike(userId: Int, setLikeImage: (Boolean) -> Unit) {
+        Logger.debug("User $userId Like post $postId")
+        viewModelScope.launch {
+            if (isLiked.value!!) {
+                likesRepository.removeLike(Likes(userId, postId))
+                likes.value = (likes.value!!.toInt() - 1).toString()
+                isLiked.value = false
+            } else {
+                likesRepository.addLike(Likes(userId, postId))
+                likes.value = (likes.value!!.toInt() + 1).toString()
+                isLiked.value = true
+            }
+
+            setLikeImage(isLiked.value!!)
+        }
     }
 
 }

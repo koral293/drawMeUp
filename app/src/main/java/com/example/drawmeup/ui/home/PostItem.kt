@@ -1,4 +1,4 @@
-package com.example.drawmeup.ui.post
+package com.example.drawmeup.ui.home
 
 import UserSession
 import android.content.Context

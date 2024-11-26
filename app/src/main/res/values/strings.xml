@@ -17,4 +17,6 @@
     <string name="post_description">Opis pracy</string>
     <string name="post_tags">Tagi</string>
     <string name="post_add">Dodaj</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

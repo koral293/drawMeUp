@@ -1,9 +1,10 @@
+package com.example.drawmeup.ui.home
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.databinding.PostItemBinding
-import com.example.drawmeup.ui.post.PostItem
 import kotlinx.coroutines.runBlocking
 
 class PostListAdapter(
