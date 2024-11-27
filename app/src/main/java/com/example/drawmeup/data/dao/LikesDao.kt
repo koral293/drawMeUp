@@ -10,9 +10,6 @@ import com.example.drawmeup.data.entities.LikesEntity
 @Dao
 interface LikesDao {
 
-    @Query("SELECT * FROM likes")
-    suspend fun getAll(): List<LikesEntity>
-
     @Query("SELECT COUNT(*) FROM likes WHERE postId = :postId")
     suspend fun getCountForPost(postId: Int) : Int
 

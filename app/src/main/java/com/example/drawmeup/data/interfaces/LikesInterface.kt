@@ -5,8 +5,6 @@ import com.example.drawmeup.data.models.Likes
 
 interface LikesInterface {
 
-    suspend fun getAll() : List<LikesEntity>
-
     suspend fun getCountForPost(postId: Int) : Int
 
     suspend fun addLike(likes: Likes)

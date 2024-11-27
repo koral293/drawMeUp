@@ -12,12 +12,6 @@ import kotlinx.coroutines.withContext
 class LikesRepository(val context: Context) : LikesInterface {
     private val db = DramMeUpRoomDB.open(context)
 
-    override suspend fun getAll(): List<LikesEntity> {
-        return withContext(Dispatchers.IO) {
-            db.likes.getAll()
-        }
-    }
-
     override suspend fun getCountForPost(postId: Int): Int {
         return withContext(Dispatchers.IO) {
             db.likes.getCountForPost(postId)
@@ -44,27 +38,25 @@ class LikesRepository(val context: Context) : LikesInterface {
 
     override suspend fun testData() {
         withContext(Dispatchers.IO) {
-            if (getAll().isEmpty()) {
-                addLike(Likes(2, 4))
-                addLike(Likes(2, 1))
-                addLike(Likes(2, 2))
-                addLike(Likes(2, 3))
-                addLike(Likes(3, 4))
-                addLike(Likes(3, 1))
-                addLike(Likes(3, 2))
-                addLike(Likes(3, 3))
-                addLike(Likes(4, 4))
-                addLike(Likes(4, 1))
-                addLike(Likes(4, 2))
-                addLike(Likes(4, 3))
-                addLike(Likes(5, 4))
-                addLike(Likes(5, 1))
-                addLike(Likes(5, 2))
-                addLike(Likes(5, 3))
-                addLike(Likes(6, 3))
-                addLike(Likes(7, 3))
-                addLike(Likes(8, 3))
-            }
+            addLike(Likes(2, 4))
+            addLike(Likes(2, 1))
+            addLike(Likes(2, 2))
+            addLike(Likes(2, 3))
+            addLike(Likes(3, 4))
+            addLike(Likes(3, 1))
+            addLike(Likes(3, 2))
+            addLike(Likes(3, 3))
+            addLike(Likes(4, 4))
+            addLike(Likes(4, 1))
+            addLike(Likes(4, 2))
+            addLike(Likes(4, 3))
+            addLike(Likes(5, 4))
+            addLike(Likes(5, 1))
+            addLike(Likes(5, 2))
+            addLike(Likes(5, 3))
+            addLike(Likes(6, 3))
+            addLike(Likes(7, 3))
+            addLike(Likes(8, 3))
         }
     }
 }

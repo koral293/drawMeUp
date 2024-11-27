@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentHomeBinding
 import com.example.drawmeup.utils.Logger
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
 
@@ -34,6 +35,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         postListAdapter = PostListAdapter(viewModel::onViewPost, viewModel::onPostLike)
         binding.postListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -64,6 +66,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.VISIBLE
         viewModel.loadPosts()
     }
 

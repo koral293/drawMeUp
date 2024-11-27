@@ -44,98 +44,95 @@ class PostRepository(val context: Context) : PostInterface {
 
     override suspend fun testData() {
         withContext(Dispatchers.IO) {
-            if (getAll().isEmpty()) {
-
-                fun getAsByteArray(imageId: Int): Bitmap {
-                    return Glide.with(context)
-                        .asBitmap()
-                        .load(imageId)
-                        .override(256, 256)
-                        .submit()
-                        .get()
-                }
-
-                createOrUpdate(
-                    Post(
-                        id = 1,
-                        userId = 1,
-                        name = "Example one",
-                        postData = getAsByteArray(R.drawable.example_1),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Funny")
-                    )
-                )
-                createOrUpdate(
-                    Post(
-                        id = 2,
-                        userId = 2,
-                        name = "Example two",
-                        postData = getAsByteArray(R.drawable.example_2),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Scary")
-                    )
-                )
-                createOrUpdate(
-                    Post(
-                        id = 3,
-                        userId = 1,
-                        name = "Example three",
-                        postData = getAsByteArray(R.drawable.example_1),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Funny", "Scary")
-                    )
-                )
-                createOrUpdate(
-                    Post(
-                        id = 4,
-                        userId = 1,
-                        name = "Example four",
-                        postData = getAsByteArray(R.drawable.example_4),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Scary")
-                    )
-                )
-                createOrUpdate(
-                    Post(
-                        id = 5,
-                        userId = 1,
-                        name = "Example one",
-                        postData = getAsByteArray(R.drawable.example_1),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Funny")
-                    )
-                )
-                createOrUpdate(
-                    Post(
-                        id = 6,
-                        userId = 2,
-                        name = "Example two",
-                        postData = getAsByteArray(R.drawable.example_2),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Scary")
-                    )
-                )
-                createOrUpdate(
-                    Post(
-                        id = 7,
-                        userId = 1,
-                        name = "Example three",
-                        postData = getAsByteArray(R.drawable.example_1),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Funny", "Scary")
-                    )
-                )
-                createOrUpdate(
-                    Post(
-                        id = 8,
-                        userId = 1,
-                        name = "Example four",
-                        postData = getAsByteArray(R.drawable.example_4),
-                        description = "Test description",
-                        tag = arrayListOf("Post", "Scary")
-                    )
-                )
+            fun getAsByteArray(imageId: Int): Bitmap {
+                return Glide.with(context)
+                    .asBitmap()
+                    .load(imageId)
+                    .override(256, 256)
+                    .submit()
+                    .get()
             }
+
+            createOrUpdate(
+                Post(
+                    id = 1,
+                    userId = 1,
+                    name = "Example one",
+                    postData = getAsByteArray(R.drawable.example_1),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Funny")
+                )
+            )
+            createOrUpdate(
+                Post(
+                    id = 2,
+                    userId = 2,
+                    name = "Example two",
+                    postData = getAsByteArray(R.drawable.example_2),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Scary")
+                )
+            )
+            createOrUpdate(
+                Post(
+                    id = 3,
+                    userId = 1,
+                    name = "Example three",
+                    postData = getAsByteArray(R.drawable.example_1),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Funny", "Scary")
+                )
+            )
+            createOrUpdate(
+                Post(
+                    id = 4,
+                    userId = 1,
+                    name = "Example four",
+                    postData = getAsByteArray(R.drawable.example_4),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Scary")
+                )
+            )
+            createOrUpdate(
+                Post(
+                    id = 5,
+                    userId = 1,
+                    name = "Example one",
+                    postData = getAsByteArray(R.drawable.example_1),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Funny")
+                )
+            )
+            createOrUpdate(
+                Post(
+                    id = 6,
+                    userId = 2,
+                    name = "Example two",
+                    postData = getAsByteArray(R.drawable.example_2),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Scary")
+                )
+            )
+            createOrUpdate(
+                Post(
+                    id = 7,
+                    userId = 1,
+                    name = "Example three",
+                    postData = getAsByteArray(R.drawable.example_1),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Funny", "Scary")
+                )
+            )
+            createOrUpdate(
+                Post(
+                    id = 8,
+                    userId = 1,
+                    name = "Example four",
+                    postData = getAsByteArray(R.drawable.example_4),
+                    description = "Test description",
+                    tag = arrayListOf("Post", "Scary")
+                )
+            )
         }
     }
 }

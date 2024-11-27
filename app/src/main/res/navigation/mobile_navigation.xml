@@ -19,9 +19,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.drawmeup.ui.dashboard.ConversationsFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_conversations"
+        android:name="com.example.drawmeup.ui.conversations.ConversationsFragment"
+        android:label="@string/title_conversations"
         tools:layout="@layout/fragment_conversations" />
 
     <fragment

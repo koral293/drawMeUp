@@ -12,14 +12,14 @@ import com.example.drawmeup.navigation.ActionStatus
 import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.text.SimpleDateFormat
-import java.util.Date
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class PostViewModel : ViewModel() {
-    var postRepository = RepositoryLocator.postRepository
-    var commentRepository = RepositoryLocator.commentRepository
-    var userRepository = RepositoryLocator.userRepository
-    var likesRepository = RepositoryLocator.likesRepository
+    private var postRepository = RepositoryLocator.postRepository
+    private var commentRepository = RepositoryLocator.commentRepository
+    private var userRepository = RepositoryLocator.userRepository
+    private var likesRepository = RepositoryLocator.likesRepository
 
     val name = MutableLiveData("")
     val description = MutableLiveData("")
@@ -29,26 +29,24 @@ class PostViewModel : ViewModel() {
     val comment = MutableLiveData("")
 
     var postId: Int = 0
-
     var isLiked = MutableLiveData(false)
-
     val commentList = MutableLiveData(emptyList<Comment>())
 
     fun init(id: Int, loadImage: (Bitmap) -> Unit) {
         postId = id
         viewModelScope.launch {
-                val post = postRepository.getPostById(id)!!
-                Logger.debug("Post found: $post")
-                name.value = post.name
-                description.value = post.description
-                tags.value = post.tag.joinToString { it }
-                author.value = userRepository.getById(post.userId).name
-                likes.value = likesRepository.getCountForPost(id).toString()
+            val post = postRepository.getPostById(id)!!
+            Logger.debug("Post found: $post")
+            name.value = post.name
+            description.value = post.description
+            tags.value = post.tag.joinToString { it }
+            author.value = userRepository.getById(post.userId).name
+            likes.value = likesRepository.getCountForPost(id).toString()
 
-                isLiked.value = likesRepository.getLike(UserSession.user.id, postId) != null
-                Logger.debug("Is liked: ${isLiked.value}")
+            isLiked.value = likesRepository.getLike(UserSession.user.id, postId) != null
+            Logger.debug("Is liked: ${isLiked.value}")
 
-                loadImage(post.postData)
+            loadImage(post.postData)
         }
     }
 
@@ -74,7 +72,8 @@ class PostViewModel : ViewModel() {
                         UserSession.user.id,
                         postId,
                         comment.value.toString(),
-                        SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()).toString()
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                            .format(LocalDateTime.now()).toString()
                     )
                 )
                 loadComments()

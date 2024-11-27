@@ -9,7 +9,6 @@ import com.example.drawmeup.R
 
 class MessageFragment : Fragment() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

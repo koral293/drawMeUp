@@ -6,9 +6,9 @@ interface ConversationParticipantInterface {
 
     suspend fun getParticipants(conversationId: Int) : List<ConversationParticipant>
 
-    suspend fun addParticipant(conversationParticipants: ConversationParticipant)
+    suspend fun getConversations(userId: Int) : List<ConversationParticipant>
 
-    suspend fun removeParticipant(conversationParticipants: ConversationParticipant)
+    suspend fun addParticipant(conversationParticipant: ConversationParticipant)
 
     suspend fun testData()
 }

@@ -30,7 +30,6 @@ class PostFragment : Fragment() {
         arguments?.let {
             type = it.getSerializable(TYPE_KEY, PostType::class.java) ?: PostType.View(0)
         }
-        // TODO: Use the ViewModel
     }
 
     override fun onCreateView(

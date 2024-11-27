@@ -6,7 +6,7 @@ interface MessageInterface {
 
     suspend fun getMessages(conversationId: Int) : List<Message>
 
-    suspend fun sendMessage(Message: Message)
+    suspend fun sendMessage(message: Message)
 
     suspend fun testData()
 }

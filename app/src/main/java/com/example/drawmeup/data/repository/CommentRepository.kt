@@ -2,7 +2,6 @@ package com.example.drawmeup.data.repository
 
 import android.content.Context
 import com.example.drawmeup.data.DramMeUpRoomDB
-import com.example.drawmeup.data.dao.CommentDao
 import com.example.drawmeup.data.entities.CommentEntity.Companion.toEntity
 import com.example.drawmeup.data.interfaces.CommentInterface
 import com.example.drawmeup.data.models.Comment
@@ -20,7 +19,6 @@ class CommentRepository(val context: Context) : CommentInterface {
         }
     }
 
-
     override suspend fun addComment(comment: Comment) {
         withContext(Dispatchers.IO) {
             db.comment.addComment(comment.toEntity())
@@ -34,8 +32,6 @@ class CommentRepository(val context: Context) : CommentInterface {
     }
 
     override suspend fun testData() {
-        if (getComments(1).isNotEmpty()) return
-
         val comments = arrayListOf(
             Comment(1, 1, 1, "This is a comment"),
             Comment(2, 1, 1, "This is another comment"),
