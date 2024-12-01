@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Conversation
+import com.example.drawmeup.navigation.ChatNav
 import com.example.drawmeup.navigation.Destination
 import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ class ConversationsViewModel : ViewModel() {
     val navigation = MutableLiveData<Destination>()
 
     fun onViewConversation(id: Int) {
-        //TODO: IMPLEMENT ON VIEW CLICK
+        Logger.debug("View conversation $id")
+        navigation.value = ChatNav(id)
     }
 
     fun loadConversations() {
