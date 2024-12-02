@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            app:layout_constraintBottom_toTopOf="@+id/commentEditText"
+            app:layout_constraintBottom_toTopOf="@+id/sendMessageEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,25 +26,25 @@
             tools:listitem="@layout/conversation_item" />
 
         <EditText
-            android:id="@+id/commentEditText"
+            android:id="@+id/sendMessageEditText"
             android:layout_width="326dp"
             android:layout_height="76dp"
             android:background="@android:drawable/dialog_holo_dark_frame"
             android:ems="10"
             android:inputType="text"
-            android:text="@={viewModel.comment}"
+            android:text="@={viewModel.message}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/sendCommentButton"
+            android:id="@+id/sendMessageButton"
             android:layout_width="75dp"
             android:layout_height="77dp"
             android:src="@android:drawable/ic_menu_send"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/commentEditText"
-            app:layout_constraintTop_toTopOf="@+id/commentEditText" />
+            app:layout_constraintStart_toEndOf="@+id/sendMessageEditText"
+            app:layout_constraintTop_toTopOf="@+id/sendMessageEditText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

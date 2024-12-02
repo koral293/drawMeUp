@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentConversationsBinding
+import com.example.drawmeup.utils.Logger
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ConversationsFragment : Fragment() {
@@ -33,7 +34,6 @@ class ConversationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         conversationsListAdapter = ConversationsListAdapter(viewModel::onViewConversation)
         binding.conversationsListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -48,11 +48,17 @@ class ConversationsFragment : Fragment() {
             it.resolve(findNavController())
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadConversations()
+            binding.swipeRefreshLayout.isRefreshing = false
+            Logger.debug("List refreshed")
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.VISIBLE
+        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility =
+            View.VISIBLE
         viewModel.loadConversations()
     }
 

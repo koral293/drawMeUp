@@ -1,5 +1,6 @@
 package com.example.drawmeup.data.interfaces
 
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.drawmeup.data.models.Post
 
 interface PostInterface {
@@ -14,7 +15,6 @@ interface PostInterface {
 
     suspend fun testData()
 
-    companion object {
-        const val GENERATE_ID = 0
-    }
+    suspend fun searchPosts(query: SupportSQLiteQuery): List<Post>
+
 }

@@ -1,9 +1,12 @@
 package com.example.drawmeup.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -62,11 +65,27 @@ class HomeFragment : Fragment() {
         binding.addPostButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_addPostFragment)
         }
+
+        binding.searchEditText.setOnEditorActionListener { textView, i, keyEvent ->
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                val imm =
+                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val currentFocus = requireActivity().currentFocus
+                if (currentFocus != null) {
+                    imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+                }
+                viewModel.searchPosts()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.VISIBLE
+        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility =
+            View.VISIBLE
         viewModel.loadPosts()
     }
 

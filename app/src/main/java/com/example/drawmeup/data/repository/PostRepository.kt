@@ -2,6 +2,7 @@ package com.example.drawmeup.data.repository
 
 import android.content.Context
 import android.graphics.Bitmap
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.bumptech.glide.Glide
 import com.example.drawmeup.R
 import com.example.drawmeup.data.DramMeUpRoomDB
@@ -79,7 +80,7 @@ class PostRepository(val context: Context) : PostInterface {
                     userId = 1,
                     name = "Example three",
                     postData = getAsByteArray(R.drawable.example_1),
-                    description = "Test description",
+                    description = "Test description magic",
                     tag = arrayListOf("Post", "Funny", "Scary")
                 )
             )
@@ -109,7 +110,7 @@ class PostRepository(val context: Context) : PostInterface {
                     userId = 2,
                     name = "Example two",
                     postData = getAsByteArray(R.drawable.example_2),
-                    description = "Test description",
+                    description = "Test description magic",
                     tag = arrayListOf("Post", "Scary")
                 )
             )
@@ -135,4 +136,13 @@ class PostRepository(val context: Context) : PostInterface {
             )
         }
     }
+
+    override suspend fun searchPosts(query: SupportSQLiteQuery): List<Post> {
+        return withContext(Dispatchers.IO) {
+            db.post.searchPosts(query).map {
+                it.toPost()
+            }
+        }
+    }
+
 }

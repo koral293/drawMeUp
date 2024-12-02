@@ -3,6 +3,8 @@ package com.example.drawmeup.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.sqlite.db.SimpleSQLiteQuery
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Likes
 import com.example.drawmeup.data.models.Post
@@ -15,6 +17,7 @@ class HomeViewModel : ViewModel() {
     private val postRepository = RepositoryLocator.postRepository
     private val likesRepository = RepositoryLocator.likesRepository
     val postList: MutableLiveData<List<Post>> = MutableLiveData(emptyList())
+    val searchText: MutableLiveData<String> = MutableLiveData("")
 
     val navigation = MutableLiveData<Destination>()
 
@@ -38,6 +41,29 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             postList.value = postRepository.getAll()
         }
+    }
+
+    fun searchPosts() {
+        viewModelScope.launch {
+            Logger.debug("Search text: ${searchText.value}")
+            val builtQuery = buildTagSearchQuery(searchText.value!!.split(" "))
+            Logger.debug("Query: ${builtQuery.sql}")
+            val filteredPosts = postRepository.searchPosts(builtQuery)
+            Logger.debug("Found posts: $filteredPosts")
+            postList.value = filteredPosts
+        }
+    }
+
+    private fun buildTagSearchQuery(tags: List<String>): SupportSQLiteQuery {
+        val queryBuilder = StringBuilder("SELECT * FROM post WHERE ")
+        tags.forEachIndexed { index, tag ->
+            //TODO: INCLUDE TAGS
+            queryBuilder.append("description LIKE '%$tag%'")
+            if (index < tags.size - 1) {
+                queryBuilder.append(" AND ")
+            }
+        }
+        return SimpleSQLiteQuery(queryBuilder.toString())
     }
 
 }

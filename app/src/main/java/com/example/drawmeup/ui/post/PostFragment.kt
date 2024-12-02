@@ -1,5 +1,6 @@
 package com.example.drawmeup.ui.post
 
+import UserSession
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -49,7 +50,6 @@ class PostFragment : Fragment() {
             //TODO: What is purpose of that?????
             (type as? PostType.View)?.let {
                 init(it.id, ::loadImage)
-                loadComments()
             }
 
             val commentListAdaper = PostCommentsAdapter(viewModel::deleteComment)

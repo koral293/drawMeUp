@@ -47,10 +47,11 @@ class PostViewModel : ViewModel() {
             Logger.debug("Is liked: ${isLiked.value}")
 
             loadImage(post.postData)
+            loadComments()
         }
     }
 
-    fun loadComments() {
+    private fun loadComments() {
         viewModelScope.launch {
             commentList.value = commentRepository.getComments(postId)
         }
