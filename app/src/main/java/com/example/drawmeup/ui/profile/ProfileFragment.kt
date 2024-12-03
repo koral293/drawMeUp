@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.drawmeup.databinding.FragmentProfileBinding
 import com.example.drawmeup.utils.Logger
@@ -31,7 +32,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileListAdapter = ProfileListAdapter()
+        profileListAdapter = ProfileListAdapter(viewModel::postEdit)
 
         binding.profileRecyclerView.apply {
             addItemDecoration(GridSpacingItemDecoration(10))
@@ -43,6 +44,10 @@ class ProfileFragment : Fragment() {
         viewModel.postList.observe(viewLifecycleOwner) {
             profileListAdapter.postList = it
             Logger.debug(it.toString())
+        }
+
+        viewModel.navigation.observe(viewLifecycleOwner) {
+            it.resolve(findNavController())
         }
     }
 

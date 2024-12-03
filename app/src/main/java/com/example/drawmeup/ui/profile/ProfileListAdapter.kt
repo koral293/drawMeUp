@@ -7,8 +7,11 @@ import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.databinding.ProfileItemBinding
 import kotlinx.coroutines.runBlocking
 
-class ProfileListAdapter :
-    RecyclerView.Adapter<ProfileItem>() {
+class ProfileListAdapter(
+    private val onItemClick: (Int) -> Unit,
+) :
+    RecyclerView.Adapter<ProfileItem>(
+    ) {
     var postList: List<Post> = emptyList()
         set(value) {
             field = value
@@ -19,7 +22,7 @@ class ProfileListAdapter :
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ProfileItemBinding.inflate(layoutInflater, parent, false)
 
-        return ProfileItem(binding)
+        return ProfileItem(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: ProfileItem, position: Int) {

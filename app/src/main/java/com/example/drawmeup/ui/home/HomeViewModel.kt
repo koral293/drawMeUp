@@ -23,7 +23,7 @@ class HomeViewModel : ViewModel() {
 
     fun onViewPost(id: Int) {
         Logger.debug("View post $id")
-        navigation.value = PostNav(id)
+        navigation.value = PostNav(id, true)
     }
 
     fun onPostLike(userId: Int, postId: Int, isLiked: Boolean) {

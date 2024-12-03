@@ -20,13 +20,18 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentAddPostBinding
 import com.example.drawmeup.navigation.ActionStatus
+import com.example.drawmeup.navigation.PostType
+import com.example.drawmeup.utils.Logger
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
+
+private const val TYPE_KEY = "type"
 
 class AddPostFragment : Fragment() {
 
     private lateinit var binding: FragmentAddPostBinding
     private val viewModel: AddPostViewModel by viewModels()
+    private lateinit var type: PostType
     private val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
     private val pickImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -52,6 +57,32 @@ class AddPostFragment : Fragment() {
             }
         }
 
+    fun loadImage() {
+        Glide.with(this)
+            .asBitmap()
+            .load(viewModel.image.value)
+            .override(256, 256)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    binding.postArtImageView.setImageBitmap(resource)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+            })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        type = PostType.View(0)
+        arguments?.let {
+            type = it.getSerializable(TYPE_KEY, PostType::class.java) ?: PostType.View(0)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,6 +100,14 @@ class AddPostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
 
+        with(viewModel) {
+            Logger.debug("Type: $type")
+            (type as? PostType.View)?.let {
+                Logger.debug("Post id: ${it.id}")
+                init(it.id, ::loadImage)
+            }
+        }
+
         binding.postArtImageView.setOnClickListener {
             pickImage.launch(intent)
         }
@@ -77,7 +116,13 @@ class AddPostFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 val status = viewModel.addPost()
                 if (ActionStatus.SUCCESS == status) {
-                    findNavController().navigate(R.id.action_addPostFragment_to_navigation_home)
+                    (type as? PostType.View)?.let {
+                        if (it.id != 0) {
+                            findNavController().navigate(R.id.action_addPostFragment_to_navigation_profile)
+                        } else {
+                            findNavController().navigate(R.id.action_addPostFragment_to_navigation_home)
+                        }
+                    }
                 }
             }
         }

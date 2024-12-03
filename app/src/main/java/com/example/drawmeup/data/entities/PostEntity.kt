@@ -17,7 +17,6 @@ data class PostEntity(
     val name: String,
     val postData: ByteArray,
     val description: String,
-    //val comments: ArrayList<Comment>,
     @TypeConverters(Converters::class)
     val tag: ArrayList<String>
 ) {
