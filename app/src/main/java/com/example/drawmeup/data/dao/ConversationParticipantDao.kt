@@ -18,4 +18,7 @@ interface ConversationParticipantDao {
     @Insert
     suspend fun addParticipant(conversationParticipant: ConversationParticipantEntity)
 
+    @Query("SELECT EXISTS(SELECT 1 FROM conversation_participant WHERE userId IN (:user1, :user2) GROUP BY conversationId HAVING COUNT(*) = 2)")
+    suspend fun conversationExists(user1: Int, user2: Int): Int
+
 }

@@ -11,8 +11,8 @@ import kotlinx.coroutines.withContext
 class ConversationRepository(val context: Context) : ConversationInterface {
     private val db = DramMeUpRoomDB.open(context)
 
-    override suspend fun createConversation(conversation: Conversation) {
-        withContext(Dispatchers.IO) {
+    override suspend fun createConversation(conversation: Conversation): Long {
+        return withContext(Dispatchers.IO) {
             db.conversation.createConversation(conversation.toEntity())
         }
     }

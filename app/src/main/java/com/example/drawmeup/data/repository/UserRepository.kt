@@ -67,6 +67,14 @@ class UserRepository(val context: Context) : UserInterface {
                         password = "test",
                     )
                 )
+                createOrUpdate(
+                    User(
+                        id = 3,
+                        name = "conversationTest",
+                        email = "conversationTest@gmail.com",
+                        password = "conversationTest",
+                    )
+                )
             }
         }
     }

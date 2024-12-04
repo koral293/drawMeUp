@@ -109,7 +109,11 @@ class AddPostFragment : Fragment() {
         }
 
         binding.postArtImageView.setOnClickListener {
-            pickImage.launch(intent)
+            (type as? PostType.View)?.let {
+                if (it.id == 0) {
+                    pickImage.launch(intent)
+                }
+            }
         }
 
         binding.addButton.setOnClickListener {

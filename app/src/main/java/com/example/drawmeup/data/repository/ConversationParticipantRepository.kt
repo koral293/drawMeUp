@@ -32,6 +32,12 @@ class ConversationParticipantRepository(val context: Context) : ConversationPart
         }
     }
 
+    override suspend fun conversationExists(user1: Int, user2: Int): Int {
+        return withContext(Dispatchers.IO) {
+            db.conversationParticipant.conversationExists(user1, user2)
+        }
+    }
+
     override suspend fun testData() {
         addParticipant(ConversationParticipant(1, 1))
         addParticipant(ConversationParticipant(1, 2))

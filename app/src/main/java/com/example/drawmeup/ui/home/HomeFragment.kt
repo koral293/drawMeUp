@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadPosts()
+            viewModel.searchPosts()
             binding.swipeRefreshLayout.isRefreshing = false
             Logger.debug("List refreshed")
         }
