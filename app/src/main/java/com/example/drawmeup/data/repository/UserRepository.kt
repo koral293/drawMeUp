@@ -1,6 +1,10 @@
 package com.example.drawmeup.data.repository
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import com.bumptech.glide.Glide
+import com.example.drawmeup.R
 import com.example.drawmeup.data.DramMeUpRoomDB
 import com.example.drawmeup.data.entities.UserEntity
 import com.example.drawmeup.data.entities.UserEntity.Companion.toEntity
@@ -51,12 +55,23 @@ class UserRepository(val context: Context) : UserInterface {
     override suspend fun testData() {
         withContext(Dispatchers.IO) {
             if (getAll().isEmpty()) {
+
+                fun getAsByteArray(imageId: Int): Bitmap {
+                    return Glide.with(context)
+                        .asBitmap()
+                        .load(imageId)
+                        .override(256, 256)
+                        .submit()
+                        .get()
+                }
+
                 createOrUpdate(
                     User(
                         id = 1,
                         name = "Test",
                         email = "test@test",
                         password = "test",
+                        avatar = getAsByteArray(R.drawable.example_1)
                     )
                 )
                 createOrUpdate(
@@ -65,6 +80,7 @@ class UserRepository(val context: Context) : UserInterface {
                         name = "Test2",
                         email = "test@gmail.com",
                         password = "test",
+                        avatar = getAsByteArray(R.drawable.example_3)
                     )
                 )
                 createOrUpdate(
@@ -73,6 +89,7 @@ class UserRepository(val context: Context) : UserInterface {
                         name = "conversationTest",
                         email = "conversationTest@gmail.com",
                         password = "conversationTest",
+                        avatar = getAsByteArray(R.drawable.example_4)
                     )
                 )
             }

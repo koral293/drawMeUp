@@ -6,11 +6,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.drawmeup.R
+import com.example.drawmeup.data.RepositoryLocator
+import com.example.drawmeup.data.RepositoryLocator.userRepository
 import com.example.drawmeup.data.models.Conversation
 import com.example.drawmeup.data.models.Message
+import com.example.drawmeup.data.models.User
 import com.example.drawmeup.databinding.ConversationItemBinding
 import com.example.drawmeup.databinding.MsgReceiverItemBinding
 import com.example.drawmeup.databinding.MsgSenderItemBinding
+import kotlinx.coroutines.runBlocking
 
 class ChatAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(
@@ -46,7 +50,7 @@ class ChatAdapter(
         if (holder is SentMessageViewHolder) {
             holder.onBind(message)
         } else if (holder is ReceivedMessageViewHolder) {
-            holder.onBind(message)
+            runBlocking { holder.onBind(message) }
         }
     }
 
@@ -60,7 +64,7 @@ class ChatAdapter(
         ) = with(msgSenderItemBinding) {
 
             //TODO: Replace with real avatar in future
-            userAvatar.setImageResource(com.example.drawmeup.R.drawable.obraz_2023_08_20_235249287)
+            userAvatar.setImageBitmap(UserSession.user.avatar)
             messageText.text = messageItem.message
             timeTextView.text = messageItem.date
         }
@@ -69,13 +73,15 @@ class ChatAdapter(
         // ViewHolder dla odebranych wiadomości
         class ReceivedMessageViewHolder(private val msgReceiverItemBinding: MsgReceiverItemBinding) :
             RecyclerView.ViewHolder(msgReceiverItemBinding.root) {
-
-                fun onBind(
+                val userRepository = RepositoryLocator.userRepository
+                suspend fun onBind(
                 messageItem: Message,
             ) = with(msgReceiverItemBinding) {
 
+                val user = userRepository.getById(messageItem.senderId).toUser()
+
                 //TODO: Replace with real avatar in future
-                userAvatar.setImageResource(com.example.drawmeup.R.drawable.obraz_2023_08_20_235249287)
+                userAvatar.setImageBitmap(user.avatar)
                 messageText.text = messageItem.message
                 timeTextView.text = messageItem.date
             }

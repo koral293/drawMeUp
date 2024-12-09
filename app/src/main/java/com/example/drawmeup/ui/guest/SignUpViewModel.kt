@@ -1,6 +1,7 @@
 package com.example.drawmeup.ui.guest
 
 import UserSession
+import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.drawmeup.data.RepositoryLocator
@@ -17,6 +18,7 @@ class SignUpViewModel : ViewModel() {
     val nickname = MutableLiveData("")
     val email = MutableLiveData("")
     val password = MutableLiveData("")
+    val avatar = MutableLiveData(Bitmap.createBitmap(1, 1, Bitmap.Config.ALPHA_8))
 
     private val userRepository = RepositoryLocator.userRepository
 
@@ -64,7 +66,8 @@ class SignUpViewModel : ViewModel() {
             0,
             nickname.value.toString(),
             email.value.toString().lowercase(),
-            password.value.toString()
+            password.value.toString(),
+            avatar.value!!
         )
 
         withContext(Dispatchers.IO) { userRepository.createOrUpdate(newUser) }

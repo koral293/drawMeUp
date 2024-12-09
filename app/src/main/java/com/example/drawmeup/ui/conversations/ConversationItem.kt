@@ -23,7 +23,7 @@ class ConversationItem(private val conversationItemBinding: ConversationItemBind
             conversationParticipantRepository.getParticipants(conversationItem.id).first {
                 it.userId != UserSession.user.id
             }
-        val user = userRepository.getById(otherUserConversationParticipant.userId)
+        val user = userRepository.getById(otherUserConversationParticipant.userId).toUser()
 
         //TODO: Replace with real avatar in future
         userAvatar.setImageResource(R.drawable.obraz_2023_08_20_235249287)
@@ -42,6 +42,8 @@ class ConversationItem(private val conversationItemBinding: ConversationItemBind
             dateTextView.text = lastMessage.date
         }
         messageText.text = messageTextFormated
+
+        userAvatar.setImageBitmap(user.avatar)
 
 
         root.setOnClickListener {

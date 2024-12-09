@@ -1,6 +1,7 @@
 package com.example.drawmeup.ui.chat
 
 import UserSession
+import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,7 +19,7 @@ import java.time.format.DateTimeFormatter
 class ChatViewModel : ViewModel() {
 
     val chatList: MutableLiveData<List<Message>> = MutableLiveData(emptyList())
-    val user: MutableLiveData<User> = MutableLiveData(User(0, "", "", ""))
+    val user: MutableLiveData<User> = MutableLiveData(User(0, "", "", "", Bitmap.createBitmap(1, 1, Bitmap.Config.ALPHA_8)))
     val message = MutableLiveData("")
     var converastionId: Int = 0
 
