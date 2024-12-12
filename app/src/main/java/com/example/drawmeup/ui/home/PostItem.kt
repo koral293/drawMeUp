@@ -12,6 +12,7 @@ import com.example.drawmeup.utils.Logger
 
 class PostItem(myContext: Context, private val postItemBinding: PostItemBinding) :
     RecyclerView.ViewHolder(postItemBinding.root) {
+
     private val userRepository = RepositoryLocator.userRepository
     private val likesRepository = RepositoryLocator.likesRepository
     private val context = myContext
@@ -73,7 +74,6 @@ class PostItem(myContext: Context, private val postItemBinding: PostItemBinding)
         artImage.setOnClickListener {
             Logger.debug("Image clicked")
             onItemClick(postItem.id)
-
         }
     }
 }

@@ -10,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 class ConversationsListAdapter(
     private val onItemClick: (Int) -> Unit
 ) : RecyclerView.Adapter<ConversationItem>() {
+
     var conversationList: List<Conversation> = emptyList()
         set(value) {
             field = value

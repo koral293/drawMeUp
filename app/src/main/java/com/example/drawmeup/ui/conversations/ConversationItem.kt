@@ -9,11 +9,10 @@ import com.example.drawmeup.databinding.ConversationItemBinding
 
 class ConversationItem(private val conversationItemBinding: ConversationItemBinding) :
     RecyclerView.ViewHolder(conversationItemBinding.root) {
-    private val conversationParticipantRepository =
-        RepositoryLocator.conversationParticipantRepository
+
+    private val conversationParticipantRepository = RepositoryLocator.conversationParticipantRepository
     private val messageRepository = RepositoryLocator.messageRepository
     private val userRepository = RepositoryLocator.userRepository
-
 
     suspend fun onBind(
         conversationItem: Conversation,
@@ -25,29 +24,26 @@ class ConversationItem(private val conversationItemBinding: ConversationItemBind
             }
         val user = userRepository.getById(otherUserConversationParticipant.userId).toUser()
 
-        //TODO: Replace with real avatar in future
-        userAvatar.setImageResource(R.drawable.obraz_2023_08_20_235249287)
+        userAvatar.setImageBitmap(user.avatar)
         userName.text = user.name
 
         val lastMessage = messageRepository.getMessages(conversationItem.id).firstOrNull()
 
-        var messageTextFormated = "Start chatting with your friend!"
+        var messageTextFormated = R.string.message_template.toString()
         dateTextView.text = ""
         if (lastMessage != null) {
-            if (lastMessage.senderId == UserSession.user.id) {
-                messageTextFormated = "You: ${lastMessage.message}"
+            messageTextFormated = if (lastMessage.senderId == UserSession.user.id) {
+                "You: ${lastMessage.message}"
             } else {
-                messageTextFormated = "${user.name}: ${lastMessage.message}"
+                "${user.name}: ${lastMessage.message}"
             }
             dateTextView.text = lastMessage.date
         }
         messageText.text = messageTextFormated
 
-        userAvatar.setImageBitmap(user.avatar)
-
-
         root.setOnClickListener {
             onItemClick(conversationItem.id)
         }
     }
+
 }

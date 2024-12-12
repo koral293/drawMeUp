@@ -1,4 +1,4 @@
-package com.example.drawmeup.ui.guest
+package com.example.drawmeup.ui.guest.signin
 
 import UserSession
 import androidx.lifecycle.MutableLiveData
@@ -12,21 +12,17 @@ import java.util.Date
 
 class SignInViewModel : ViewModel() {
 
+    private var userRepository = RepositoryLocator.userRepository
     val email = MutableLiveData("")
     val password = MutableLiveData("")
 
-    private var userRepository = RepositoryLocator.userRepository
-
     suspend fun onSubmit(): ActionStatus {
         val result = withContext(Dispatchers.IO) {
-            userRepository.getByEmailAndPassword(
-                email.value.toString().lowercase(),
-                password.value.toString()
-            )
+            userRepository.getByEmailAndPassword(email.value.toString().lowercase(), password.value.toString())
         }
+
         if (result != null) {
             Logger.debug("User found: $result")
-
             UserSession.user = result.toUser()
             UserSession.isLogged = true
             UserSession.lastLogged = Date()

@@ -11,6 +11,7 @@ class PostListAdapter(
     private val onItemClick: (Int) -> Unit,
     private val onLikeClick: (Int, Int, Boolean) -> Unit
 ) : RecyclerView.Adapter<PostItem>() {
+
     var postList: List<Post> = emptyList()
         set(value) {
             field = value
@@ -33,4 +34,5 @@ class PostListAdapter(
     override fun getItemCount(): Int {
         return postList.size
     }
+
 }

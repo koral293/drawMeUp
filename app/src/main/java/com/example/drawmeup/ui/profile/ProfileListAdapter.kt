@@ -12,6 +12,7 @@ class ProfileListAdapter(
 ) :
     RecyclerView.Adapter<ProfileItem>(
     ) {
+
     var postList: List<Post> = emptyList()
         set(value) {
             field = value

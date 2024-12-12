@@ -19,8 +19,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.drawmeup.MainActivity
+import com.example.drawmeup.R
 import com.example.drawmeup.databinding.FragmentProfileBinding
-import com.example.drawmeup.ui.guest.WelcomeFragment
 import com.example.drawmeup.utils.Logger
 
 class ProfileFragment : Fragment() {
@@ -68,51 +68,51 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileListAdapter = ProfileListAdapter(viewModel::postEdit)
-        binding.userAvatar.setImageBitmap(viewModel.avatar.value)
+        with(viewModel) {
+            profileListAdapter = ProfileListAdapter(viewModel::postEdit)
 
-        binding.profileRecyclerView.apply {
-            addItemDecoration(GridSpacingItemDecoration(10))
-            //TODO: Be aware might be buggy
-            layoutManager = GridLayoutManager(context, 3)
-            adapter = profileListAdapter
-        }
+            binding.userAvatar.setImageBitmap(viewModel.avatar.value)
 
-        viewModel.postList.observe(viewLifecycleOwner) {
-            profileListAdapter.postList = it
-            Logger.debug(it.toString())
-        }
-
-        viewModel.navigation.observe(viewLifecycleOwner) {
-            it.resolve(findNavController())
-        }
-
-        binding.logoutButton.setOnClickListener {
-
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle("Wylogowanie")
-            builder.setMessage("Czy chcesz się wylogować?")
-
-            builder.setPositiveButton("Tak") { dialog, _ ->
-                dialog.dismiss()
-                viewModel.logout()
-                val intent = Intent(context, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+            binding.profileRecyclerView.apply {
+                addItemDecoration(GridSpacingItemDecoration(10))
+                //TODO: Be aware might be buggy
+                layoutManager = GridLayoutManager(context, 3)
+                adapter = profileListAdapter
             }
 
-            builder.setNegativeButton("Nie") { dialog, _ ->
-                dialog.dismiss()
+            postList.observe(viewLifecycleOwner) {
+                profileListAdapter.postList = it
+                Logger.debug(it.toString())
             }
 
-            builder.show()
-        }
+            navigation.observe(viewLifecycleOwner) {
+                it.resolve(findNavController())
+            }
 
-        binding.userAvatar.setOnClickListener {
-            pickImage.launch(intent)
+            binding.logoutButton.setOnClickListener {
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle(R.string.logout)
+                builder.setMessage(R.string.logout_confirm_warning)
+
+                builder.setPositiveButton(R.string.yes_button) { dialog, _ ->
+                    dialog.dismiss()
+                    viewModel.logout()
+                    val intent = Intent(context, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+
+                builder.setNegativeButton(R.string.no_button) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.show()
+            }
+
+            binding.userAvatar.setOnClickListener {
+                pickImage.launch(intent)
+            }
         }
     }
-
 
     override fun onStart() {
         super.onStart()

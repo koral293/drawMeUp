@@ -1,22 +1,53 @@
 <resources>
+
     <string name="app_name">DrawMeUp</string>
+    <string name="welcome_message">Welcome to DrawMeUp!</string>
+
+    <!-- FORMATS -->
+    <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
+
+    <!-- LABELS -->
     <string name="title_home">Home</string>
     <string name="title_conversations">Conversations</string>
     <string name="title_profile">Profile</string>
-
-    <string name="welcome_message">Witaj w Dolinie</string>
-    <string name="sign_in">Zaloguj się</string>
-    <string name="sign_up">Zarejestruj się</string>
-
-    <string name="password_reset">Zapomniałeś hasła?</string>
+    <string name="remove_comment">Remove comment</string>
+    <string name="logout">Logout</string>
     <string name="e_mail">E-mail</string>
-    <string name="password">Hasło</string>
-    <string name="nickname">Nazwa profilu</string>
+    <string name="password">Password</string>
+    <string name="nickname">Nickname</string>
+    <string name="post_name">Post title</string>
+    <string name="post_description">Post description</string>
+    <string name="post_tags">Tags</string>
 
-    <string name="post_name">Tytuł pracy</string>
-    <string name="post_description">Opis pracy</string>
-    <string name="post_tags">Tagi</string>
-    <string name="post_add">Dodaj</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- LOGIN AND REGISTER -->
+    <string name="invalid_credentials">Invalid credentials!</string>
+    <string name="nickname_length_error">Nickname must be at least 3 characters long</string>
+    <string name="email_regex_error">Invalid email address</string>
+    <string name="password_length_error">Password must be at least 8 characters long</string>
+    <string name="email_in_use_error">This email is already in use</string>
+    <string name="nickname_in_use_error">This nickname is already in use</string>
+
+    <!-- BUTTONS -->
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="edit_button">Edit</string>
+    <string name="add_button">Add</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="sign_up_button">Sign up</string>
+    <string name="post_add_button">Add post</string>
+    <string name="reset_password_button">Forgot password?</string>
+
+    <!-- MESSAGES -->
+    <string name="message_sent">Message sent!</string>
+    <string name="message_template">Start chatting with your friend!</string>
+    <string name="user_do_not_exists">User does not exists!</string>
+    <string name="conversation_exists">Conversation already exists!</string>
+    <string name="conversation_created">Conversation created!</string>
+    <string name="comment_added">Comment added!</string>
+    <string name="confirm_comment_removal_warning">Are you sure, you want to delete this comment?</string>
+    <string name="delete_not_own_comment_warning">You cannot remove comments that you did not created!</string>
+    <string name="logout_confirm_warning">Are you sure you want to logout?</string>
+
 </resources>

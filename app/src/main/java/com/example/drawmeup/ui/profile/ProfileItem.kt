@@ -9,7 +9,6 @@ class ProfileItem(private val profileItemBinding: ProfileItemBinding, private va
 
     fun onBind(postItem: Post) = with(profileItemBinding) {
         postImage.setImageBitmap(postItem.postData)
-
         postImage.setOnClickListener {
             onPostClick(postItem.id)
         }

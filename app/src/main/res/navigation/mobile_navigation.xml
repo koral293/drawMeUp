@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.drawmeup.ui.guest.SignInFragment"
+        android:name="com.example.drawmeup.ui.guest.signin.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -63,7 +63,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.drawmeup.ui.guest.SignUpFragment"
+        android:name="com.example.drawmeup.ui.guest.signup.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -78,7 +78,7 @@
         tools:layout="@layout/fragment_post"/>
     <fragment
         android:id="@+id/addPostFragment"
-        android:name="com.example.drawmeup.ui.post.AddPostFragment"
+        android:name="com.example.drawmeup.ui.post.addpost.AddPostFragment"
         android:label="AddPostFragment"
         tools:layout="@layout/fragment_add_post">
         <action

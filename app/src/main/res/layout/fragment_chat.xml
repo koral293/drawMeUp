@@ -32,7 +32,7 @@
             android:background="@android:drawable/dialog_holo_dark_frame"
             android:ems="10"
             android:inputType="text"
-            android:text="@={viewModel.message}"
+            android:text="@={viewModel.messageText}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

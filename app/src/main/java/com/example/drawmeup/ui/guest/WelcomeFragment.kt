@@ -62,11 +62,8 @@ class WelcomeFragment : Fragment() {
 
     private fun navigateToHome() {
         Logger.debug("UserSession: ${UserSession.user} lastLogged: ${UserSession.lastLogged}")
-
         val navController = findNavController()
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.navigation_home, true)
-            .build()
+        val navOptions = NavOptions.Builder().setPopUpTo(R.id.navigation_home, true).build()
         navController.navigate(R.id.navigation_home, null, navOptions)
     }
 

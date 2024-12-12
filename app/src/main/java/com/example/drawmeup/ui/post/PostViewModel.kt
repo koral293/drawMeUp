@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.drawmeup.R
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Comment
 import com.example.drawmeup.data.models.Likes
@@ -20,14 +21,12 @@ class PostViewModel : ViewModel() {
     private var commentRepository = RepositoryLocator.commentRepository
     private var userRepository = RepositoryLocator.userRepository
     private var likesRepository = RepositoryLocator.likesRepository
-
+    private val tags = MutableLiveData("")
     val name = MutableLiveData("")
     val description = MutableLiveData("")
-    val tags = MutableLiveData("")
     val author = MutableLiveData("")
     val likes = MutableLiveData("")
     val comment = MutableLiveData("")
-
     var postId: Int = 0
     var isLiked = MutableLiveData(false)
     val commentList = MutableLiveData(emptyList<Comment>())
@@ -73,7 +72,7 @@ class PostViewModel : ViewModel() {
                         UserSession.user.id,
                         postId,
                         comment.value.toString(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        DateTimeFormatter.ofPattern(R.string.date_format.toString())
                             .format(LocalDateTime.now()).toString()
                     )
                 )
@@ -97,7 +96,6 @@ class PostViewModel : ViewModel() {
                 likes.value = (likes.value!!.toInt() + 1).toString()
                 isLiked.value = true
             }
-
             setLikeImage(isLiked.value!!)
         }
     }

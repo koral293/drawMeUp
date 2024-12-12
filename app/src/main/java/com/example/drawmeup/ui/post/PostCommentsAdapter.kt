@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.drawmeup.data.models.Comment
-import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.databinding.CommentItemBinding
-import com.example.drawmeup.databinding.PostItemBinding
 import kotlinx.coroutines.runBlocking
 
 class PostCommentsAdapter(
     private val deleteItem: (Comment) -> Unit
 ) : RecyclerView.Adapter<CommentItem>() {
+
     var commentList: List<Comment> = emptyList()
         set(value) {
             field = value
@@ -34,4 +33,5 @@ class PostCommentsAdapter(
     override fun getItemCount(): Int {
         return commentList.size
     }
+
 }

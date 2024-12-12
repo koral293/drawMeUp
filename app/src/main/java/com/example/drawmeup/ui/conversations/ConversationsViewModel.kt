@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class ConversationsViewModel : ViewModel() {
-    private val conversationParticipantRepository =
-        RepositoryLocator.conversationParticipantRepository
+
+    private val conversationParticipantRepository = RepositoryLocator.conversationParticipantRepository
     private val conversationRepository = RepositoryLocator.conversationRepository
     private val userRepository = RepositoryLocator.userRepository
     val conversationList: MutableLiveData<List<Conversation>> = MutableLiveData(emptyList())
@@ -42,22 +42,15 @@ class ConversationsViewModel : ViewModel() {
         runBlocking {
             val user = userRepository.getByName(username)
             if (user != null) {
-                if (conversationParticipantRepository.conversationExists(
-                        UserSession.user.id,
-                        user.id
-                    ) == 0
-                ) {
-                    val newConversationId =
-                        conversationRepository.createConversation(Conversation(0))
+                if (conversationParticipantRepository.conversationExists(UserSession.user.id, user.id) == 0) {
+
+                    val newConversationId = conversationRepository.createConversation(Conversation(0))
+
                     conversationParticipantRepository.addParticipant(
-                        ConversationParticipant(
-                            newConversationId.toInt(), user.id
-                        )
+                        ConversationParticipant(newConversationId.toInt(), user.id)
                     )
                     conversationParticipantRepository.addParticipant(
-                        ConversationParticipant(
-                            newConversationId.toInt(), UserSession.user.id
-                        )
+                        ConversationParticipant(newConversationId.toInt(), UserSession.user.id)
                     )
                     status = ActionStatus.SUCCESS
                 } else {

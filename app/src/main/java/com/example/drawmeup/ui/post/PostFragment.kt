@@ -13,23 +13,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drawmeup.R
+import com.example.drawmeup.data.BottomNavigationManager
 import com.example.drawmeup.databinding.FragmentPostBinding
 import com.example.drawmeup.navigation.ActionStatus
 import com.example.drawmeup.navigation.PostType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-private const val TYPE_KEY = "type"
-
 class PostFragment : Fragment() {
 
     private lateinit var binding: FragmentPostBinding
-    private val viewModel: PostViewModel by viewModels()
     private lateinit var type: PostType
+    private val viewModel: PostViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            type = it.getSerializable(TYPE_KEY, PostType::class.java) ?: PostType.View(0)
+            type = it.getSerializable("type", PostType::class.java) ?: PostType.View(0)
         }
     }
 
@@ -58,24 +57,22 @@ class PostFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 adapter = commentListAdaper
             }
-            viewModel.commentList.observe(viewLifecycleOwner) {
+
+            commentList.observe(viewLifecycleOwner) {
                 commentListAdaper.commentList = it
             }
-
-            //TODO: Image like in post view
 
             binding.sendCommentButton.setOnClickListener {
                 val status = addComment()
                 if (status == ActionStatus.SUCCESS) {
                     Toast.makeText(
                         requireContext().applicationContext,
-                        "Komentarz dodany",
+                        R.string.comment_added,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                val imm =
-                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                val currentFocus = requireActivity().currentFocus // Get the currently focused view
+                val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val currentFocus = requireActivity().currentFocus
                 if (currentFocus != null) {
                     imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
                 }
@@ -83,7 +80,6 @@ class PostFragment : Fragment() {
 
             binding.likePostButton.setOnClickListener {
                 viewModel.onPostLike(UserSession.user.id, ::setLikeButtonImage)
-
             }
         }
     }
@@ -103,8 +99,7 @@ class PostFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility =
-            View.VISIBLE
+        BottomNavigationManager.show(requireActivity())
     }
 
 }

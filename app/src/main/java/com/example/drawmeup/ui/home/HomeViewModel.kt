@@ -14,11 +14,11 @@ import com.example.drawmeup.utils.Logger
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
+
     private val postRepository = RepositoryLocator.postRepository
     private val likesRepository = RepositoryLocator.likesRepository
     val postList: MutableLiveData<List<Post>> = MutableLiveData(emptyList())
     val searchText: MutableLiveData<String> = MutableLiveData("")
-
     val navigation = MutableLiveData<Destination>()
 
     fun onViewPost(id: Int) {

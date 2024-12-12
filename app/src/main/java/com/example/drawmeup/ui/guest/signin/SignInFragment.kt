@@ -1,4 +1,4 @@
-package com.example.drawmeup.ui.guest
+package com.example.drawmeup.ui.guest.signin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -40,7 +40,7 @@ class SignInFragment : Fragment() {
                 if (status == ActionStatus.SUCCESS) {
                     findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
                 } else {
-                    Toast.makeText(requireContext().applicationContext, "Invalid credentials", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext().applicationContext, R.string.invalid_credentials, Toast.LENGTH_SHORT).show()
                 }
             }
         }

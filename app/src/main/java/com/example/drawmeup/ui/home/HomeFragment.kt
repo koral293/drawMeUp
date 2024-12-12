@@ -13,9 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drawmeup.R
+import com.example.drawmeup.data.BottomNavigationManager
 import com.example.drawmeup.databinding.FragmentHomeBinding
 import com.example.drawmeup.utils.Logger
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
 
@@ -38,54 +38,55 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(viewModel) {
 
-        postListAdapter = PostListAdapter(viewModel::onViewPost, viewModel::onPostLike)
-        binding.postListRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = postListAdapter
-        }
-        viewModel.postList.observe(viewLifecycleOwner) {
-            postListAdapter.postList = it
-        }
+            postListAdapter = PostListAdapter(viewModel::onViewPost, viewModel::onPostLike)
+            binding.postListRecyclerView.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = postListAdapter
+            }
 
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.searchPosts()
-            binding.swipeRefreshLayout.isRefreshing = false
-            Logger.debug("List refreshed")
-        }
+            postList.observe(viewLifecycleOwner) {
+                postListAdapter.postList = it
+            }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            requireActivity().finish()
-        }
-
-        viewModel.navigation.observe(viewLifecycleOwner) {
-            it.resolve(findNavController())
-        }
-
-        binding.addPostButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_addPostFragment)
-        }
-
-        binding.searchEditText.setOnEditorActionListener { textView, i, keyEvent ->
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                val imm =
-                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                val currentFocus = requireActivity().currentFocus
-                if (currentFocus != null) {
-                    imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
-                }
+            binding.swipeRefreshLayout.setOnRefreshListener {
                 viewModel.searchPosts()
-                true
-            } else {
-                false
+                binding.swipeRefreshLayout.isRefreshing = false
+                Logger.debug("List refreshed")
+            }
+
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                requireActivity().finish()
+            }
+
+            navigation.observe(viewLifecycleOwner) {
+                it.resolve(findNavController())
+            }
+
+            binding.addPostButton.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_home_to_addPostFragment)
+            }
+
+            binding.searchEditText.setOnEditorActionListener { _, i, _ ->
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    val currentFocus = requireActivity().currentFocus
+                    if (currentFocus != null) {
+                        imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+                    }
+                    viewModel.searchPosts()
+                    true
+                } else {
+                    false
+                }
             }
         }
     }
 
     override fun onStart() {
         super.onStart()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility =
-            View.VISIBLE
+        BottomNavigationManager.show(requireActivity())
         viewModel.loadPosts()
     }
 

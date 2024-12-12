@@ -1,4 +1,4 @@
-package com.example.drawmeup.ui.post
+package com.example.drawmeup.ui.post.addpost
 
 import android.app.Activity
 import android.content.Intent
@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.drawmeup.R
+import com.example.drawmeup.data.BottomNavigationManager
 import com.example.drawmeup.databinding.FragmentAddPostBinding
 import com.example.drawmeup.navigation.ActionStatus
 import com.example.drawmeup.navigation.PostType
@@ -30,8 +31,8 @@ private const val TYPE_KEY = "type"
 class AddPostFragment : Fragment() {
 
     private lateinit var binding: FragmentAddPostBinding
-    private val viewModel: AddPostViewModel by viewModels()
     private lateinit var type: PostType
+    private val viewModel: AddPostViewModel by viewModels()
     private val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
     private val pickImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -57,7 +58,7 @@ class AddPostFragment : Fragment() {
             }
         }
 
-    fun loadImage() {
+    private fun loadImage() {
         Glide.with(this)
             .asBitmap()
             .load(viewModel.image.value)
@@ -106,25 +107,25 @@ class AddPostFragment : Fragment() {
                 Logger.debug("Post id: ${it.id}")
                 init(it.id, ::loadImage)
             }
-        }
 
-        binding.postArtImageView.setOnClickListener {
-            (type as? PostType.View)?.let {
-                if (it.id == 0) {
-                    pickImage.launch(intent)
+            binding.postArtImageView.setOnClickListener {
+                (type as? PostType.View)?.let {
+                    if (it.id == 0) {
+                        pickImage.launch(intent)
+                    }
                 }
             }
-        }
 
-        binding.addButton.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                val status = viewModel.addPost()
-                if (ActionStatus.SUCCESS == status) {
-                    (type as? PostType.View)?.let {
-                        if (it.id != 0) {
-                            findNavController().navigate(R.id.action_addPostFragment_to_navigation_profile)
-                        } else {
-                            findNavController().navigate(R.id.action_addPostFragment_to_navigation_home)
+            binding.addButton.setOnClickListener {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val status = viewModel.addPost()
+                    if (ActionStatus.SUCCESS == status) {
+                        (type as? PostType.View)?.let {
+                            if (it.id != 0) {
+                                findNavController().navigate(R.id.action_addPostFragment_to_navigation_profile)
+                            } else {
+                                findNavController().navigate(R.id.action_addPostFragment_to_navigation_home)
+                            }
                         }
                     }
                 }
@@ -134,8 +135,7 @@ class AddPostFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)?.visibility =
-            View.VISIBLE
+        BottomNavigationManager.show(requireActivity())
     }
 
 }
