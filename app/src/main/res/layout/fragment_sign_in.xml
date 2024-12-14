@@ -19,81 +19,66 @@
             android:id="@+id/singInImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="216dp"
+            android:contentDescription="@string/draw_me_up_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="174dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="174dp"
-            android:text="@string/welcome_message"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/singInImageView" />
+            app:srcCompat="@drawable/logo"
+            tools:ignore="ImageContrastCheck"
+            tools:srcCompat="@drawable/logo" />
 
         <Button
             android:id="@+id/signInButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="140dp"
+            android:layout_marginTop="20dp"
             android:text="@string/sign_in_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
         <Button
-            android:id="@+id/singInSignUpButton"
+            android:id="@+id/forgotPasswordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="120dp"
-            android:layout_marginBottom="200dp"
-            android:text="@string/password_reset"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/reset_password_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signInButton"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/signInButton" />
 
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="90dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="15dp"
+            android:autofillHints="Email address"
             android:ems="10"
-            android:inputType="text"
             android:hint="@string/e_mail"
+            android:inputType="text|textEmailAddress"
             android:text="@={viewModel.email}"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/singInImageView" />
 
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="90dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
+            android:autofillHints="Password"
             android:ems="10"
-            android:inputType="textPassword"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:text="@={viewModel.password}"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 

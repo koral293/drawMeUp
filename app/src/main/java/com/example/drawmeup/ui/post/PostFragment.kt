@@ -51,15 +51,15 @@ class PostFragment : Fragment() {
                 init(it.id, ::loadImage)
             }
 
-            val commentListAdaper = PostCommentsAdapter(viewModel::deleteComment)
+            val commentListAdapter = PostCommentsAdapter(viewModel::deleteComment)
 
             binding.commentsList.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = commentListAdaper
+                adapter = commentListAdapter
             }
 
             commentList.observe(viewLifecycleOwner) {
-                commentListAdaper.commentList = it
+                commentListAdapter.commentList = it
             }
 
             binding.sendCommentButton.setOnClickListener {

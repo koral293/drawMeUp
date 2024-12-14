@@ -52,10 +52,10 @@ class WelcomeFragment : Fragment() {
             }
         }
 
-        binding.welcomeSignInButton.setOnClickListener {
+        binding.signInButton.setOnClickListener {
             navController.navigate(R.id.action_welcomeFragment_to_signInFragment)
         }
-        binding.welcomeSignUpButton.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             navController.navigate(R.id.action_welcomeFragment_to_signUpFragment)
         }
     }
