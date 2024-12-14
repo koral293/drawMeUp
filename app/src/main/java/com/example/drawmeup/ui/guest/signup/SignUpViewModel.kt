@@ -29,11 +29,11 @@ class SignUpViewModel : ViewModel() {
             isError = true
         }
         if (!email.value!!.contains("@")) {
-            binding.singUpEmailEditText.error = R.string.email_regex_error.toString()
+            binding.emailEditText.error = R.string.email_regex_error.toString()
             isError = true
         }
         if (password.value!!.length < 8) {
-            binding.singUpPasswordEditText.error = R.string.password_length_error.toString()
+            binding.passwordEditText.error = R.string.password_length_error.toString()
             isError = true
         }
 
@@ -47,7 +47,7 @@ class SignUpViewModel : ViewModel() {
 
         if (result != null) {
             Logger.debug("This email is already in use: ${email.value}")
-            binding.singUpEmailEditText.error = R.string.email_in_use_error.toString()
+            binding.emailEditText.error = R.string.email_in_use_error.toString()
             isError = true
         }
 

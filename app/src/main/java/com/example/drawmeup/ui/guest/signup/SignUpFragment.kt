@@ -33,7 +33,7 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.singUpButton.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 val status = viewModel.onSubmit(binding)
                 if (ActionStatus.SUCCESS == status) {
