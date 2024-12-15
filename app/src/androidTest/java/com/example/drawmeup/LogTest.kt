@@ -31,7 +31,7 @@ class LogTest {
 
     @Test
     fun logIn() {
-        val loginButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/welcomeSignInButton"))
+        val loginButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
         val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
         val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
         val singInButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
