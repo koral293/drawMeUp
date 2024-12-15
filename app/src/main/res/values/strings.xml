@@ -18,6 +18,9 @@
     <string name="post_name">Post title</string>
     <string name="post_description">Post description</string>
     <string name="post_tags">Tags</string>
+    <string name="type_to_search">Type to search…</string>
+    <string name="post_image">Post image</string>
+    <string name="like">Like button</string>
 
     <!-- LOGIN AND REGISTER -->
     <string name="invalid_credentials">Invalid credentials!</string>
