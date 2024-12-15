@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.drawmeup.R
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Post
 import com.example.drawmeup.navigation.ActionStatus
@@ -19,7 +18,7 @@ class AddPostViewModel : ViewModel() {
     val name = MutableLiveData("")
     val description = MutableLiveData("")
     val tags = MutableLiveData("")
-    val buttonText = MutableLiveData(R.string.add_button.toString())
+    val buttonText = MutableLiveData("")
     val image = MutableLiveData(Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888))
 
     suspend fun addPost(): ActionStatus {
@@ -51,7 +50,6 @@ class AddPostViewModel : ViewModel() {
     fun init(id: Int, loadImage: () -> Unit) {
         Logger.debug("Post id: $id")
         if (id != 0) {
-            buttonText.value = R.string.edit_button.toString()
             viewModelScope.launch {
                 val post = postRepository.getPostById(id)!!
                 Logger.debug("Post found: $post")

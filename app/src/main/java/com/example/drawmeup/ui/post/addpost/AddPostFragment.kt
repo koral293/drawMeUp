@@ -106,6 +106,11 @@ class AddPostFragment : Fragment() {
             (type as? PostType.View)?.let {
                 Logger.debug("Post id: ${it.id}")
                 init(it.id, ::loadImage)
+                if (it.id == 0) {
+                    buttonText.value = getString(R.string.add_button)
+                } else {
+                    buttonText.value = getString(R.string.edit_button)
+                }
             }
 
             binding.postArtImageView.setOnClickListener {
