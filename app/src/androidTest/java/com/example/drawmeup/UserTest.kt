@@ -1,12 +1,14 @@
 package com.example.drawmeup
 
 import android.content.Intent
+import android.os.SystemClock
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import java.lang.AssertionError
 
@@ -24,7 +26,11 @@ class UserTest {
         val intent = context.packageManager.getLaunchIntentForPackage(packageName)
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
+        SystemClock.sleep(2000)
         val loginButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
+        if (!loginButton.exists()) {
+            return
+        }
         val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
         val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
         val singInButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
