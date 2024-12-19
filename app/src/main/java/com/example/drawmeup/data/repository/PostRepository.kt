@@ -110,7 +110,7 @@ class PostRepository(val context: Context) : PostInterface {
                     userId = 2,
                     name = "Example two",
                     postData = getAsByteArray(R.drawable.example_2),
-                    description = "Test description magic",
+                    description = "Test description testingMagic",
                     tag = arrayListOf("Post", "Scary")
                 )
             )

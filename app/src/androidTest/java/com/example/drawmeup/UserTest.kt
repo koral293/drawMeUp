@@ -2,9 +2,11 @@ package com.example.drawmeup
 
 import android.content.Intent
 import android.os.SystemClock
+import android.view.KeyEvent
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import org.junit.Before
@@ -114,4 +116,47 @@ class UserTest {
         add.click()
     }
 
+    @Test
+    fun addComment() {
+        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
+        val comment = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/commentEditText"))
+        val add = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/sendCommentButton"))
+        post.click()
+        comment.setText("UI test")
+        add.click()
+        assert(device.hasObject(By.pkg(packageName).text("UI test")))
+    }
+
+    @Test
+    fun deleteComment() {
+        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
+        val confirm = device.findObject(UiSelector().resourceId("android:id/button1"))
+        post.click()
+
+        val comment: UiObject2 = device.findObject(By.text("This is a comment"))
+        comment.longClick()
+        confirm.click()
+
+        assert(!device.hasObject(By.pkg(packageName).text("This is a comment")))
+    }
+
+    @Test
+    fun deleteSomeComment() {
+        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
+        post.click()
+
+        val comment: UiObject2 = device.findObject(By.text("Test2"))
+        comment.longClick()
+
+        assert(!device.hasObject(By.pkg(packageName).text("Are you sure, you want to delete this comment?")))
+    }
+
+    @Test
+    fun likePost() {
+        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
+        val like = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/likePostButton"))
+        post.click()
+        like.click()
+        assert(device.hasObject(By.pkg(packageName).text("5")))
+    }
 }
