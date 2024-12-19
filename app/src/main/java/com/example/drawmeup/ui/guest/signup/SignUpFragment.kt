@@ -35,10 +35,15 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.signUpButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                val status = viewModel.onSubmit(binding)
-                if (ActionStatus.SUCCESS == status) {
-                    findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
-                }
+                viewModel.onSubmit(binding, ::onSignUpButtonClick)
+            }
+        }
+    }
+
+    fun onSignUpButtonClick(actionStatus: ActionStatus) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            if (ActionStatus.SUCCESS == actionStatus) {
+                findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
             }
         }
     }
