@@ -27,6 +27,8 @@ class MessageRepository(val context: Context) : MessageInterface {
             db.message.sendMessage(message.toEntity())
 
             if (message.message == "Test message") {
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                val dateNow = LocalDateTime.now()
                 conversationParticipantRepository.getParticipants(message.conversationId).forEach {
                     if (it.userId != message.senderId) {
                         val message = Message(
@@ -34,7 +36,7 @@ class MessageRepository(val context: Context) : MessageInterface {
                             message.conversationId,
                             it.userId,
                             "Callback message",
-                            LocalDateTime.now().toString()
+                            formatter.format(dateNow)
                         )
                         db.message.sendMessage(message.toEntity())
                     }
