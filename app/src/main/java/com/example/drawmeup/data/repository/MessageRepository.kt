@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter
 
 class MessageRepository(val context: Context) : MessageInterface {
     private val db = DramMeUpRoomDB.open(context)
+    private val conversationParticipantRepository = ConversationParticipantRepository(context)
 
     override suspend fun getMessages(conversationId: Int): List<Message> {
         return withContext(Dispatchers.IO) {
@@ -24,8 +25,22 @@ class MessageRepository(val context: Context) : MessageInterface {
     override suspend fun sendMessage(message: Message) {
         withContext(Dispatchers.IO) {
             db.message.sendMessage(message.toEntity())
-        }
 
+            if (message.message == "Test message") {
+                conversationParticipantRepository.getParticipants(message.conversationId).forEach {
+                    if (it.userId != message.senderId) {
+                        val message = Message(
+                            0,
+                            message.conversationId,
+                            it.userId,
+                            "Callback message",
+                            LocalDateTime.now().toString()
+                        )
+                        db.message.sendMessage(message.toEntity())
+                    }
+                }
+            }
+        }
     }
 
     override suspend fun testData() {
