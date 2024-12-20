@@ -2,83 +2,98 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable
             name="viewModel"
             type="com.example.drawmeup.ui.post.addpost.AddPostViewModel" />
     </data>
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       tools:context=".ui.post.addpost.AddPostFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".ui.post.addpost.AddPostFragment">
 
-       <ImageView
-           android:id="@+id/postArtImageView"
-           android:layout_width="256dp"
-           android:layout_height="256dp"
-           android:layout_marginTop="32dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           tools:src="@tools:sample/avatars" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/postArtCardView"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-       <EditText
-           android:id="@+id/nameEditText"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="16dp"
-           android:layout_marginTop="32dp"
-           android:layout_marginEnd="16dp"
-           android:ems="10"
-           android:hint="@string/post_name"
-           android:inputType="text"
-           android:text="@={viewModel.name}"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/postArtImageView" />
+            <ImageView
+                android:id="@+id/postArtImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/post_image"
+                tools:src="@tools:sample/avatars" />
+        </com.google.android.material.card.MaterialCardView>
 
-       <EditText
-           android:id="@+id/descriptionEditText"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="16dp"
-           android:layout_marginTop="32dp"
-           android:layout_marginEnd="16dp"
-           android:ems="10"
-           android:gravity="start|top"
-           android:hint="@string/post_description"
-           android:inputType="textMultiLine"
-           android:text="@={viewModel.description}"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:hint="@string/post_name"
+            android:inputType="text"
+            android:text="@={viewModel.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/postArtCardView"
+            tools:hint="Enter Post Name" />
 
-       <EditText
-           android:id="@+id/tagsEditText"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="16dp"
-           android:layout_marginTop="32dp"
-           android:layout_marginEnd="16dp"
-           android:ems="10"
-           android:gravity="start|top"
-           android:hint="@string/post_tags"
-           android:inputType="textMultiLine"
-           android:text="@={viewModel.tags}"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/descriptionEditText" />
+        <EditText
+            android:id="@+id/descriptionEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:hint="@string/post_description"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:text="@={viewModel.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameEditText"
+            tools:hint="Enter Description" />
 
-       <Button
-           android:id="@+id/addButton"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginBottom="32dp"
-           android:text="@={viewModel.buttonText}"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent" />
-   </androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/tagsEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:hint="@string/post_tags"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:text="@={viewModel.tags}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descriptionEditText"
+            tools:hint="Enter Tags (comma-separated)" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="@={viewModel.buttonText}"
+            android:textStyle="bold"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tagsEditText"
+            tools:text="Add Post" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

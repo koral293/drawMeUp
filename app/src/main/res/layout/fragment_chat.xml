@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable
             name="viewModel"
@@ -13,38 +14,57 @@
         android:layout_height="match_parent"
         tools:context=".ui.conversations.ConversationsFragment">
 
+        <!-- Chat List -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/conversationsListRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            app:layout_constraintBottom_toTopOf="@+id/sendMessageEditText"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingBottom="100dp"
+            app:layout_constraintBottom_toTopOf="@id/messageInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/conversation_item" />
+            tools:listitem="@layout/msg_sender_item" />
 
-        <EditText
-            android:id="@+id/sendMessageEditText"
-            android:layout_width="326dp"
-            android:layout_height="76dp"
-            android:background="@android:drawable/dialog_holo_dark_frame"
-            android:ems="10"
-            android:inputType="text"
-            android:text="@={viewModel.messageText}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageButton
-            android:id="@+id/sendMessageButton"
-            android:layout_width="75dp"
-            android:layout_height="77dp"
-            android:src="@android:drawable/ic_menu_send"
+        <!-- Message Input Area -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/messageInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sendMessageEditText"
-            app:layout_constraintTop_toTopOf="@+id/sendMessageEditText" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- EditText for Typing Messages -->
+            <EditText
+                android:id="@+id/sendMessageEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:autofillHints=""
+                android:hint="@string/write_message"
+                android:padding="12dp"
+                android:text="@={viewModel.messageText}"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sendMessageButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Send Button -->
+            <ImageButton
+                android:id="@+id/sendMessageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/send_message"
+                android:src="@android:drawable/ic_menu_send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

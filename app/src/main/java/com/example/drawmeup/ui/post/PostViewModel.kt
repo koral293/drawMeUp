@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.drawmeup.R
 import com.example.drawmeup.data.RepositoryLocator
 import com.example.drawmeup.data.models.Comment
 import com.example.drawmeup.data.models.Likes
@@ -72,7 +71,7 @@ class PostViewModel : ViewModel() {
                         UserSession.user.id,
                         postId,
                         comment.value.toString(),
-                        DateTimeFormatter.ofPattern(R.string.date_format.toString())
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                             .format(LocalDateTime.now()).toString()
                     )
                 )

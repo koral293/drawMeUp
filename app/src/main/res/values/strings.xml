@@ -3,9 +3,6 @@
     <string name="app_name">DrawMeUp</string>
     <string name="welcome_message">Are you ready to DrawMeUp?</string>
 
-    <!-- FORMATS -->
-    <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
-
     <!-- LABELS -->
     <string name="title_home">Home</string>
     <string name="title_conversations">Conversations</string>
@@ -21,6 +18,13 @@
     <string name="type_to_search">Type to search…</string>
     <string name="post_image">Post image</string>
     <string name="like">Like button</string>
+    <string name="user_avatar">User avatar</string>
+    <string name="comment">Comment</string>
+    <string name="write_comment">Write a comment…</string>
+    <string name="send_comment">Send comment</string>">
+    <string name="start_new_conversation">New conversation</string>
+    <string name="write_message">Write message…</string>
+    <string name="send_message">send_message</string>
 
     <!-- LOGIN AND REGISTER -->
     <string name="invalid_credentials">Invalid credentials!</string>
