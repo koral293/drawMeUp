@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.drawmeup.data.models.User
+import com.example.drawmeup.utils.Logger
 import java.io.ByteArrayOutputStream
 
 @Entity(tableName = "user")
@@ -17,7 +18,10 @@ data class UserEntity (
     val avatar: ByteArray
 ) {
     fun toUser(): User {
-        val bitmap = BitmapFactory.decodeByteArray(avatar, 0, avatar.size)
+        var bitmap = BitmapFactory.decodeByteArray(avatar, 0, avatar.size)
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ALPHA_8)
+        }
         return User(id, name, email, password, bitmap)
     }
 

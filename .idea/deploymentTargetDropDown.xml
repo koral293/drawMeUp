@@ -2,7 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="addPost()">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="createConversation()">
+        <State />
+      </entry>
+      <entry key="createConversation_user_not_found()">
+        <State />
+      </entry>
+      <entry key="logOut()">
+        <State />
+      </entry>
+      <entry key="sendMessage()">
         <State />
       </entry>
     </value>

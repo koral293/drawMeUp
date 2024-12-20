@@ -22,7 +22,7 @@ class SignUpViewModel : ViewModel() {
     val password = MutableLiveData("")
     val avatar = MutableLiveData(Bitmap.createBitmap(1, 1, Bitmap.Config.ALPHA_8))
 
-    suspend fun onSubmit(binding: FragmentSignUpBinding): ActionStatus {
+    suspend fun onSubmit(binding: FragmentSignUpBinding, callback: (ActionStatus) -> Unit ) {
         var isError = false
         if (nickname.value!!.length < 3) {
             binding.nicknameEditText.error = R.string.nickname_length_error.toString()
@@ -38,7 +38,7 @@ class SignUpViewModel : ViewModel() {
         }
 
         if (isError) {
-            return ActionStatus.FAILED
+            callback(ActionStatus.FAILED)
         }
 
         var result = withContext(Dispatchers.IO) {
@@ -62,7 +62,7 @@ class SignUpViewModel : ViewModel() {
         }
 
         if (isError) {
-            return ActionStatus.FAILED
+            callback(ActionStatus.FAILED)
         }
 
         val newUser = User(
@@ -75,23 +75,22 @@ class SignUpViewModel : ViewModel() {
 
         withContext(Dispatchers.IO) {
             userRepository.createOrUpdate(newUser)
+
+
+            result = userRepository.getByName(nickname.value.toString())
+
+            if (result != null) {
+                Logger.debug("User created: $result")
+
+                UserSession.user = result!!.toUser()
+                UserSession.isLogged = true
+                UserSession.lastLogged = Date()
+                UserSession.saveSession()
+
+                callback(ActionStatus.SUCCESS)
+            }
+
+            callback(ActionStatus.FAILED)
         }
-
-        result = withContext(Dispatchers.IO) {
-            userRepository.getByName(nickname.value.toString())
-        }
-
-        if (result != null) {
-            Logger.debug("User created: $newUser")
-
-            UserSession.user = result.toUser()
-            UserSession.isLogged = true
-            UserSession.lastLogged = Date()
-            UserSession.saveSession()
-
-            return ActionStatus.SUCCESS
-        }
-
-        return ActionStatus.FAILED
     }
 }
