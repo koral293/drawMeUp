@@ -3,7 +3,6 @@ package com.example.drawmeup.ui.post
 import UserSession
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.drawmeup.R
@@ -21,8 +20,9 @@ class CommentItem(myContext: Context, private val commentItemBinding: CommentIte
         comment: Comment,
         deleteItem: (Comment) -> Unit
     ) = with(commentItemBinding) {
-        userAvatar.setImageBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888))
-        userName.text = userRepository.getById(comment.userId).name
+        val user = userRepository.getById(comment.userId)
+        userAvatar.setImageBitmap(user.toUser().avatar)
+        userName.text = user.name
         commentText.text = comment.comment
         dateTextView.text = comment.date
 
