@@ -16,6 +16,9 @@ interface PostDao {
     @Query("SELECT * FROM post")
     suspend fun getAll(): List<PostEntity>
 
+    @Query("SELECT * FROM post WHERE userId != :userId")
+    suspend fun getAllExcludingUserId(userId: Int): List<PostEntity>
+
     @Query("SELECT * FROM post WHERE id = :id")
     suspend fun getPostById(id: Int): PostEntity?
 

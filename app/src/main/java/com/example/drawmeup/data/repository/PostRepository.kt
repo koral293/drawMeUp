@@ -35,6 +35,14 @@ class PostRepository(val context: Context) : PostInterface {
         }
     }
 
+    override suspend fun getAllExcludingUserId(userId: Int): List<Post> {
+        return withContext(Dispatchers.IO) {
+            db.post.getAllExcludingUserId(userId).map {
+                it.toPost()
+            }
+        }
+    }
+
     override suspend fun getPostsByUserId(userId: Int): List<Post> {
         return withContext(Dispatchers.IO) {
             db.post.getPostsByUserId(userId).map {
