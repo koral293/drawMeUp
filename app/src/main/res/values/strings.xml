@@ -2,6 +2,7 @@
 
     <string name="app_name">DrawMeUp</string>
     <string name="welcome_message">Are you ready to DrawMeUp?</string>
+    <string name="uri_forgot_password">https://drawmeup.com</string>"
 
     <!-- LABELS -->
     <string name="title_home">Home</string>
