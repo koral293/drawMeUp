@@ -11,6 +11,7 @@ import com.example.drawmeup.data.dao.ConversationParticipantDao
 import com.example.drawmeup.data.dao.LikesDao
 import com.example.drawmeup.data.dao.MessageDao
 import com.example.drawmeup.data.dao.PostDao
+import com.example.drawmeup.data.dao.TokenDao
 import com.example.drawmeup.data.dao.UserDao
 import com.example.drawmeup.data.entities.CommentEntity
 import com.example.drawmeup.data.entities.ConversationEntity
@@ -18,13 +19,15 @@ import com.example.drawmeup.data.entities.ConversationParticipantEntity
 import com.example.drawmeup.data.entities.LikesEntity
 import com.example.drawmeup.data.entities.MessageEntity
 import com.example.drawmeup.data.entities.PostEntity
+import com.example.drawmeup.data.entities.TokenEntity
 import com.example.drawmeup.data.entities.UserEntity
 import com.example.drawmeup.utils.Converters
 
 @Database(
     entities = [UserEntity::class, PostEntity::class, LikesEntity::class, CommentEntity::class,
-        ConversationEntity::class, MessageEntity::class, ConversationParticipantEntity::class],
-    version = 10
+        ConversationEntity::class, MessageEntity::class, ConversationParticipantEntity::class,
+               TokenEntity::class],
+    version = 12
 )
 @TypeConverters(Converters::class)
 abstract class DramMeUpRoomDB : RoomDatabase() {
@@ -36,6 +39,7 @@ abstract class DramMeUpRoomDB : RoomDatabase() {
     abstract val conversation: ConversationDao
     abstract val conversationParticipant: ConversationParticipantDao
     abstract val message: MessageDao
+    abstract val token: TokenDao
 
     companion object {
         fun open(context: Context): DramMeUpRoomDB {

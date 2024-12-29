@@ -1,5 +1,6 @@
 package com.example.drawmeup.ui.home
 
+import UserSession
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -39,7 +40,7 @@ class HomeViewModel : ViewModel() {
 
     fun loadPosts() {
         viewModelScope.launch {
-            postList.value = postRepository.getAll()
+            postList.value = postRepository.getAllExcludingUserId(UserSession.user.id)
         }
     }
 
@@ -55,7 +56,7 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun buildTagSearchQuery(tags: List<String>): SupportSQLiteQuery {
-        val queryBuilder = StringBuilder("SELECT * FROM post WHERE ")
+        val queryBuilder = StringBuilder("SELECT * FROM post WHERE userId != ${UserSession.user.id} AND")
         tags.forEachIndexed { index, tag ->
             //TODO: INCLUDE TAGS
             queryBuilder.append("description LIKE '%$tag%'")

@@ -11,6 +11,8 @@ interface PostInterface {
 
     suspend fun getAll(): List<Post>
 
+    suspend fun getAllExcludingUserId(userId: Int): List<Post>
+
     suspend fun getPostsByUserId(userId: Int): List<Post>
 
     suspend fun testData()
