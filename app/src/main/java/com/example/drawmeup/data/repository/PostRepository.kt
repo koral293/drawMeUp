@@ -65,9 +65,9 @@ class PostRepository(val context: Context) : PostInterface {
             createOrUpdate(
                 Post(
                     id = 1,
-                    userId = 1,
+                    userId = 2,
                     name = "Example one",
-                    postData = getAsByteArray(R.drawable.example_1),
+                    postData = getAsByteArray(R.drawable.hand),
                     description = "Test description",
                     tag = arrayListOf("Post", "Funny")
                 )
@@ -77,7 +77,7 @@ class PostRepository(val context: Context) : PostInterface {
                     id = 2,
                     userId = 2,
                     name = "Example two",
-                    postData = getAsByteArray(R.drawable.example_2),
+                    postData = getAsByteArray(R.drawable.flower),
                     description = "Test description",
                     tag = arrayListOf("Post", "Scary")
                 )
@@ -85,9 +85,9 @@ class PostRepository(val context: Context) : PostInterface {
             createOrUpdate(
                 Post(
                     id = 3,
-                    userId = 1,
+                    userId = 2,
                     name = "Example three",
-                    postData = getAsByteArray(R.drawable.example_1),
+                    postData = getAsByteArray(R.drawable.hand),
                     description = "Test description magic",
                     tag = arrayListOf("Post", "Funny", "Scary")
                 )
@@ -95,9 +95,9 @@ class PostRepository(val context: Context) : PostInterface {
             createOrUpdate(
                 Post(
                     id = 4,
-                    userId = 1,
+                    userId = 2,
                     name = "Example four",
-                    postData = getAsByteArray(R.drawable.example_4),
+                    postData = getAsByteArray(R.drawable.flower),
                     description = "Test description",
                     tag = arrayListOf("Post", "Scary")
                 )
@@ -105,9 +105,9 @@ class PostRepository(val context: Context) : PostInterface {
             createOrUpdate(
                 Post(
                     id = 5,
-                    userId = 1,
+                    userId = 2,
                     name = "Example one",
-                    postData = getAsByteArray(R.drawable.example_1),
+                    postData = getAsByteArray(R.drawable.hand),
                     description = "Test description",
                     tag = arrayListOf("Post", "Funny")
                 )
@@ -117,7 +117,7 @@ class PostRepository(val context: Context) : PostInterface {
                     id = 6,
                     userId = 2,
                     name = "Example two",
-                    postData = getAsByteArray(R.drawable.example_2),
+                    postData = getAsByteArray(R.drawable.flower),
                     description = "Test description testingMagic",
                     tag = arrayListOf("Post", "Scary")
                 )
@@ -127,7 +127,7 @@ class PostRepository(val context: Context) : PostInterface {
                     id = 7,
                     userId = 1,
                     name = "Example three",
-                    postData = getAsByteArray(R.drawable.example_1),
+                    postData = getAsByteArray(R.drawable.hand),
                     description = "Test description",
                     tag = arrayListOf("Post", "Funny", "Scary")
                 )
@@ -137,7 +137,7 @@ class PostRepository(val context: Context) : PostInterface {
                     id = 8,
                     userId = 1,
                     name = "Example four",
-                    postData = getAsByteArray(R.drawable.example_4),
+                    postData = getAsByteArray(R.drawable.flower),
                     description = "Test description",
                     tag = arrayListOf("Post", "Scary")
                 )

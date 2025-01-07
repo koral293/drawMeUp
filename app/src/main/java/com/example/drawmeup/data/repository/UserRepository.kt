@@ -71,7 +71,7 @@ class UserRepository(val context: Context) : UserInterface {
                         name = "Test",
                         email = "test@test",
                         password = "test",
-                        avatar = getAsByteArray(R.drawable.example_1)
+                        avatar = getAsByteArray(R.drawable.sender_message_background)
                     )
                 )
                 createOrUpdate(
@@ -80,7 +80,7 @@ class UserRepository(val context: Context) : UserInterface {
                         name = "Test2",
                         email = "test@gmail.com",
                         password = "test",
-                        avatar = getAsByteArray(R.drawable.example_3)
+                        avatar = getAsByteArray(R.drawable.receiver_message_background)
                     )
                 )
                 createOrUpdate(
@@ -89,7 +89,7 @@ class UserRepository(val context: Context) : UserInterface {
                         name = "conversationTest",
                         email = "conversationTest@gmail.com",
                         password = "conversationTest",
-                        avatar = getAsByteArray(R.drawable.example_4)
+                        avatar = getAsByteArray(R.drawable.receiver_message_background)
                     )
                 )
             }

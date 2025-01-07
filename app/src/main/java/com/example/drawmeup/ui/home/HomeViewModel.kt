@@ -58,8 +58,7 @@ class HomeViewModel : ViewModel() {
     private fun buildTagSearchQuery(tags: List<String>): SupportSQLiteQuery {
         val queryBuilder = StringBuilder("SELECT * FROM post WHERE userId != ${UserSession.user.id} AND")
         tags.forEachIndexed { index, tag ->
-            //TODO: INCLUDE TAGS
-            queryBuilder.append("description LIKE '%$tag%'")
+            queryBuilder.append(" description LIKE '%$tag%'")
             if (index < tags.size - 1) {
                 queryBuilder.append(" AND ")
             }

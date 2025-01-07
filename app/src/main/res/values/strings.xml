@@ -29,11 +29,6 @@
 
     <!-- LOGIN AND REGISTER -->
     <string name="invalid_credentials">Invalid credentials!</string>
-    <string name="nickname_length_error">Nickname must be at least 3 characters long</string>
-    <string name="email_regex_error">Invalid email address</string>
-    <string name="password_length_error">Password must be at least 8 characters long</string>
-    <string name="email_in_use_error">This email is already in use</string>
-    <string name="nickname_in_use_error">This nickname is already in use</string>
 
     <!-- BUTTONS -->
     <string name="ok_button">OK</string>
@@ -49,7 +44,6 @@
 
     <!-- MESSAGES -->
     <string name="message_sent">Message sent!</string>
-    <string name="message_template">Start chatting with your friend!</string>
     <string name="user_do_not_exists">User does not exists!</string>
     <string name="conversation_exists">Conversation already exists!</string>
     <string name="conversation_created">Conversation created!</string>
