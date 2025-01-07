@@ -2,10 +2,9 @@ package com.example.drawmeup.data.repository
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import com.bumptech.glide.Glide
 import com.example.drawmeup.R
-import com.example.drawmeup.data.DramMeUpRoomDB
+import com.example.drawmeup.data.DrawMeUpRoomDB
 import com.example.drawmeup.data.entities.UserEntity
 import com.example.drawmeup.data.entities.UserEntity.Companion.toEntity
 import com.example.drawmeup.data.interfaces.UserInterface
@@ -14,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class UserRepository(val context: Context) : UserInterface {
-    private val db = DramMeUpRoomDB.open(context)
+    private val db = DrawMeUpRoomDB.open(context)
 
     override suspend fun createOrUpdate(user: User) {
         withContext(Dispatchers.IO) {

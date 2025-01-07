@@ -1,7 +1,7 @@
 package com.example.drawmeup.data.repository
 
 import android.content.Context
-import com.example.drawmeup.data.DramMeUpRoomDB
+import com.example.drawmeup.data.DrawMeUpRoomDB
 import com.example.drawmeup.data.entities.CommentEntity.Companion.toEntity
 import com.example.drawmeup.data.interfaces.CommentInterface
 import com.example.drawmeup.data.models.Comment
@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class CommentRepository(val context: Context) : CommentInterface {
-    private val db = DramMeUpRoomDB.open(context)
+    private val db = DrawMeUpRoomDB.open(context)
 
     override suspend fun getComments(postId: Int): ArrayList<Comment> {
         return withContext(Dispatchers.IO) {

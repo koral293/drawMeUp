@@ -29,11 +29,13 @@ class GuestTest {
 
     @After
     fun tearDown() {
-        val profile = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
+        val profile =
+            device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
         if (!profile.exists()) {
             return
         }
-        val logOutButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/logoutButton"))
+        val logOutButton =
+            device.findObject(UiSelector().resourceId("com.example.drawmeup:id/logoutButton"))
         val confirm = device.findObject(UiSelector().resourceId("android:id/button1"))
         profile.click()
         logOutButton.click()
@@ -41,71 +43,144 @@ class GuestTest {
     }
 
     @Test
-    fun singUp() {
-        val signUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
-        val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
-        val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
-        val nickname = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText"))
-        val singUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+    fun signUp() {
+        val signUpButton = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/signUpButton")
+        )
+        val emailField = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/emailEditText")
+        )
+        val passwordField = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/passwordEditText")
+        )
+        val nickname = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText")
+        )
+        val singUpButton = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/signUpButton")
+        )
         signUpButton.click()
         nickname.setText("UItest")
         emailField.setText("testUI@testUI")
         passwordField.setText("test1234")
         singUpButton.click()
-        device.wait(Until.hasObject(By.pkg(packageName).text("Profile")), timeout)
+        device.wait(
+            Until.hasObject(
+                By.pkg(packageName).text("Profile")
+            ), timeout
+        )
     }
 
     @Test
-    fun singUpEmailExists() {
-        val signUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
-        val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
-        val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
-        val nickname = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText"))
-        val singUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+    fun signUpEmailExists() {
+        val signUpButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signUpButton")
+            )
+        val emailField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/emailEditText")
+            )
+        val passwordField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/passwordEditText")
+            )
+        val nickname =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText")
+            )
+        val singUpButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signUpButton")
+            )
+        val profile =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_profile")
+            )
         signUpButton.click()
         nickname.setText("test2")
         emailField.setText("test@test")
         passwordField.setText("test1234")
         singUpButton.click()
-        device.wait(Until.hasObject(By.pkg(packageName).text("2131820603")), timeout)
+        if (profile.exists()) {
+            throw AssertionError("Profile exists")
+        }
     }
 
     @Test
-    fun singUpNicknameExists() {
-        val signUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
-        val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
-        val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
-        val nickname = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText"))
-        val singUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+    fun signUpNicknameExists() {
+        val signUpButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+        val emailField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
+        val passwordField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
+        val nickname =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText"))
+        val singUpButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+        val profile =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
         signUpButton.click()
         nickname.setText("Test")
         emailField.setText("test@test")
         passwordField.setText("test1234")
         singUpButton.click()
-        device.wait(Until.hasObject(By.pkg(packageName).text("2131820603")), timeout)
+        if (profile.exists()) {
+            throw AssertionError("Profile exists")
+        }
     }
 
     @Test
-    fun singUpIncorrectPasswordExists() {
-        val signUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
-        val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
-        val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
-        val nickname = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText"))
-        val singUpButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+    fun signUpIncorrectPassword() {
+        val signUpButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+        val emailField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
+        val passwordField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
+        val nickname =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/nicknameEditText"))
+        val singUpButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signUpButton"))
+        val profile =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
         signUpButton.click()
         nickname.setText("Test")
         emailField.setText("test@test")
         passwordField.setText("1234")
         singUpButton.click()
-        device.wait(Until.hasObject(By.pkg(packageName).text("2131820603")), timeout)
+        if (profile.exists()) {
+            throw AssertionError("Profile exists")
+        }
     }
 
     @Test
-    fun singInIncorrectEmail() {
-        val signInButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
-        val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
-        val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
-        val profile = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
+    fun signInIncorrectEmail() {
+        val signInButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
+        val emailField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
+        val passwordField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
+        val profile =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
         signInButton.click()
         emailField.setText("test")
         passwordField.setText("test1234")
@@ -116,11 +191,19 @@ class GuestTest {
     }
 
     @Test
-    fun singInIncorrectPassword() {
-        val signInButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
-        val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
-        val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
-        val profile = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
+    fun signInIncorrectPassword() {
+        val signInButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
+        val emailField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
+        val passwordField =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
+        val profile =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
         signInButton.click()
         emailField.setText("test@test")
         passwordField.setText("test1234")

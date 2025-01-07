@@ -1,7 +1,7 @@
 package com.example.drawmeup.data.repository
 
 import android.content.Context
-import com.example.drawmeup.data.DramMeUpRoomDB
+import com.example.drawmeup.data.DrawMeUpRoomDB
 import com.example.drawmeup.data.entities.LikesEntity
 import com.example.drawmeup.data.entities.LikesEntity.Companion.toEntity
 import com.example.drawmeup.data.interfaces.LikesInterface
@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class LikesRepository(val context: Context) : LikesInterface {
-    private val db = DramMeUpRoomDB.open(context)
+    private val db = DrawMeUpRoomDB.open(context)
 
     override suspend fun getCountForPost(postId: Int): Int {
         return withContext(Dispatchers.IO) {

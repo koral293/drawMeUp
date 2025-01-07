@@ -29,13 +29,21 @@ class UserTest {
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
         SystemClock.sleep(2000)
-        val loginButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
+        val loginButton = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/signInButton")
+        )
         if (!loginButton.exists()) {
             return
         }
-        val emailField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/emailEditText"))
-        val passwordField = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/passwordEditText"))
-        val singInButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/signInButton"))
+        val emailField = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/emailEditText")
+        )
+        val passwordField = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/passwordEditText")
+        )
+        val singInButton = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/signInButton")
+        )
         loginButton.click()
         emailField.setText("test@test")
         passwordField.setText("test")
@@ -45,9 +53,17 @@ class UserTest {
 
     @Test
     fun logOut() {
-        val profile = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_profile"))
-        val logOutButton = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/logoutButton"))
-        val confirm = device.findObject(UiSelector().resourceId("android:id/button1"))
+        val profile =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_profile")
+            )
+        val logOutButton =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/logoutButton")
+            )
+        val confirm = device.findObject(
+            UiSelector().resourceId("android:id/button1")
+        )
         profile.click()
         logOutButton.click()
         confirm.click()
@@ -56,10 +72,19 @@ class UserTest {
 
     @Test
     fun sendMessage() {
-        val conversations = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_conversations"))
+        val conversations =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_conversations")
+            )
         val recipient = device.findObject(UiSelector().text("Test2"))
-        val message = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/sendMessageEditText"))
-        val send = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/sendMessageButton"))
+        val message =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/sendMessageEditText")
+            )
+        val send =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/sendMessageButton")
+            )
         conversations.click()
         recipient.click()
         message.setText("UI test")
@@ -68,14 +93,29 @@ class UserTest {
     }
 
     @Test
-    fun createConversation_and_send_message() {
-        val conversations = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_conversations"))
-        val create = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/newConversationButton"))
-        val addRecipient = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/edit_text"))
+    fun createConversationAndSendMessage() {
+        val conversations =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_conversations")
+            )
+        val create =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/newConversationButton")
+            )
+        val addRecipient =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/edit_text")
+            )
         val confirm = device.findObject(UiSelector().resourceId("android:id/button1"))
         val recipient = device.findObject(UiSelector().text("conversationTest"))
-        val message = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/sendMessageEditText"))
-        val send = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/sendMessageButton"))
+        val message =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/sendMessageEditText")
+            )
+        val send =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/sendMessageButton")
+            )
         conversations.click()
         create.click()
         addRecipient.setText("conversationTest")
@@ -87,12 +127,25 @@ class UserTest {
     }
 
     @Test
-    fun createConversation_user_not_found() {
-        val conversations = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/navigation_conversations"))
-        val create = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/newConversationButton"))
-        val addRecipient = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/edit_text"))
-        val confirm = device.findObject(UiSelector().resourceId("android:id/button1"))
-        val recipient = device.findObject(UiSelector().text("conversationTest2"))
+    fun createConversationUserNotFound() {
+        val conversations =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/navigation_conversations")
+            )
+        val create =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/newConversationButton")
+            )
+        val addRecipient =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/edit_text")
+            )
+        val confirm = device.findObject(
+            UiSelector().resourceId("android:id/button1")
+        )
+        val recipient = device.findObject(
+            UiSelector().text("conversationTest2")
+        )
         conversations.click()
         create.click()
         addRecipient.setText("conversationTest2")
@@ -104,11 +157,25 @@ class UserTest {
 
     @Test
     fun addPost() {
-        val addPost = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/addPostButton"))
-        val title = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/nameEditText"))
-        val description = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/descriptionEditText"))
-        val tags = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/tagsEditText"))
-        val add = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/addButton"))
+        val addPost =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/addPostButton")
+            )
+        val title =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/nameEditText")
+            )
+        val description =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/descriptionEditText")
+            )
+        val tags =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/tagsEditText")
+            )
+        val add = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/addButton")
+        )
         addPost.click()
         title.setText("UI test")
         description.setText("UI test")
@@ -118,9 +185,17 @@ class UserTest {
 
     @Test
     fun addComment() {
-        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
-        val comment = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/commentEditText"))
-        val add = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/sendCommentButton"))
+        val post = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/artImage")
+        )
+        val comment =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/commentEditText")
+            )
+        val add =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/sendCommentButton")
+            )
         post.click()
         comment.setText("UI test")
         add.click()
@@ -129,8 +204,12 @@ class UserTest {
 
     @Test
     fun deleteComment() {
-        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
-        val confirm = device.findObject(UiSelector().resourceId("android:id/button1"))
+        val post = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/artImage")
+        )
+        val confirm = device.findObject(
+            UiSelector().resourceId("android:id/button1")
+        )
         post.click()
 
         val comment: UiObject2 = device.findObject(By.text("This is a comment"))
@@ -142,19 +221,30 @@ class UserTest {
 
     @Test
     fun deleteSomeComment() {
-        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
+        val post = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/artImage")
+        )
         post.click()
 
         val comment: UiObject2 = device.findObject(By.text("Test2"))
         comment.longClick()
 
-        assert(!device.hasObject(By.pkg(packageName).text("Are you sure, you want to delete this comment?")))
+        assert(
+            !device.hasObject(
+                By.pkg(packageName).text("Are you sure, you want to delete this comment?")
+            )
+        )
     }
 
     @Test
     fun likePost() {
-        val post = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/artImage"))
-        val like = device.findObject(UiSelector().resourceId("com.example.drawmeup:id/likePostButton"))
+        val post = device.findObject(
+            UiSelector().resourceId("com.example.drawmeup:id/artImage")
+        )
+        val like =
+            device.findObject(
+                UiSelector().resourceId("com.example.drawmeup:id/likePostButton")
+            )
         post.click()
         like.click()
         assert(device.hasObject(By.pkg(packageName).text("5")))

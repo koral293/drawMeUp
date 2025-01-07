@@ -40,7 +40,7 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    fun callbackOnSubmit(actionStatus: ActionStatus) {
+    private fun callbackOnSubmit(actionStatus: ActionStatus) {
         viewLifecycleOwner.lifecycleScope.launch {
             if (ActionStatus.SUCCESS == actionStatus) {
                 findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)

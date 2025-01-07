@@ -1,7 +1,7 @@
 package com.example.drawmeup.data.repository
 
 import android.content.Context
-import com.example.drawmeup.data.DramMeUpRoomDB
+import com.example.drawmeup.data.DrawMeUpRoomDB
 import com.example.drawmeup.data.entities.ConversationParticipantEntity.Companion.toEntity
 import com.example.drawmeup.data.interfaces.ConversationParticipantInterface
 import com.example.drawmeup.data.models.ConversationParticipant
@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ConversationParticipantRepository(val context: Context) : ConversationParticipantInterface {
-    private val db = DramMeUpRoomDB.open(context)
+    private val db = DrawMeUpRoomDB.open(context)
 
     override suspend fun getParticipants(conversationId: Int): List<ConversationParticipant> {
         return withContext(Dispatchers.IO) {

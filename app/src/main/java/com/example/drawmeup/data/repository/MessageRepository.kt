@@ -1,7 +1,7 @@
 package com.example.drawmeup.data.repository
 
 import android.content.Context
-import com.example.drawmeup.data.DramMeUpRoomDB
+import com.example.drawmeup.data.DrawMeUpRoomDB
 import com.example.drawmeup.data.entities.MessageEntity.Companion.toEntity
 import com.example.drawmeup.data.interfaces.MessageInterface
 import com.example.drawmeup.data.models.Message
@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class MessageRepository(val context: Context) : MessageInterface {
-    private val db = DramMeUpRoomDB.open(context)
+    private val db = DrawMeUpRoomDB.open(context)
     private val conversationParticipantRepository = ConversationParticipantRepository(context)
 
     override suspend fun getMessages(conversationId: Int): List<Message> {

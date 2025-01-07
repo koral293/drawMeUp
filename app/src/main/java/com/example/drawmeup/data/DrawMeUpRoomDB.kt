@@ -30,7 +30,7 @@ import com.example.drawmeup.utils.Converters
     version = 12
 )
 @TypeConverters(Converters::class)
-abstract class DramMeUpRoomDB : RoomDatabase() {
+abstract class DrawMeUpRoomDB : RoomDatabase() {
 
     abstract val user: UserDao
     abstract val post: PostDao
@@ -42,9 +42,9 @@ abstract class DramMeUpRoomDB : RoomDatabase() {
     abstract val token: TokenDao
 
     companion object {
-        fun open(context: Context): DramMeUpRoomDB {
+        fun open(context: Context): DrawMeUpRoomDB {
             return Room.databaseBuilder(
-                context, DramMeUpRoomDB::class.java, "draw_me_up.db"
+                context, DrawMeUpRoomDB::class.java, "draw_me_up.db"
             ).build()
         }
     }
