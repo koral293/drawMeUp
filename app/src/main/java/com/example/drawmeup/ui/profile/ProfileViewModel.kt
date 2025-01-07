@@ -24,7 +24,7 @@ class ProfileViewModel : ViewModel() {
     val navigation = MutableLiveData<Destination>()
     fun loadPosts() {
         viewModelScope.launch {
-            postList.value = postRepository.getAll()
+            postList.value = postRepository.getPostsByUserId(UserSession.user.id)
         }
     }
 

@@ -29,7 +29,7 @@ class ConversationItem(private val conversationItemBinding: ConversationItemBind
 
         val lastMessage = messageRepository.getMessages(conversationItem.id).firstOrNull()
 
-        var messageTextFormated = R.string.message_template.toString()
+        var messageTextFormated = "Start chatting with your friend!"
         dateTextView.text = ""
         if (lastMessage != null) {
             messageTextFormated = if (lastMessage.senderId == UserSession.user.id) {
